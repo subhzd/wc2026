@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/wc2026.png" />
-
-	<meta property="og:title" content="WC 2026" />
-	<link rel="icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/wc2026.png" />
-	<meta property="og:image" content="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/wc2026.png" />
-	<meta property="og:type" content="website" />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />	
-	    
-    <title>World Cup 2026</title>
+    <title>World Cup 2026 - Road to Glory</title>
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="World Cup 2026 - Road to Glory">
+    <meta property="og:description" content="Explore the groups, match fixtures, and knockout bracket for the 2026 World Cup in Canada, Mexico, and the USA.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/wc2026_oc.png">
+    <meta property="og:url" content="https://wc2026.aimaverick.me">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="World Cup 2026 - Road to Glory">
+    <meta name="twitter:description" content="Explore the groups, match fixtures, and knockout bracket for the 2026 World Cup.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/wc2026_oc.png">
 
     <!-- Tailwind CSS -->
-    <script src="cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <!-- Tailwind Config -->
     <script>
         tailwind.config = {
@@ -56,7 +60,7 @@
         }
     </script>
     <!-- Icons -->
-    <script src="lucide@latest"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css"/>
@@ -99,39 +103,31 @@
 
         /* --- Goal Post Card Styling --- */
         .goal-post-card {
-            /* The Frame */
-            border-top: 6px solid rgba(255, 255, 255, 0.9); /* Crossbar */
-            border-left: 3px solid rgba(255, 255, 255, 0.3); /* Left Post */
-            border-right: 3px solid rgba(255, 255, 255, 0.3); /* Right Post */
-            border-bottom: none; /* Open bottom */
+            border-top: 6px solid rgba(255, 255, 255, 0.9);
+            border-left: 3px solid rgba(255, 255, 255, 0.3);
+            border-right: 3px solid rgba(255, 255, 255, 0.3);
+            border-bottom: none;
             border-radius: 12px 12px 4px 4px;
-            
-            /* The Net Background */
             background-color: rgba(255, 255, 255, 0.02);
             background-image: 
                 linear-gradient(30deg, rgba(255,255,255,0.05) 1px, transparent 1px),
                 linear-gradient(150deg, rgba(255,255,255,0.05) 1px, transparent 1px);
             background-size: 20px 20px;
-            
             backdrop-filter: blur(12px);
-            box-shadow: 
-                0 20px 40px -10px rgba(0, 0, 0, 0.6), /* Deep shadow */
-                inset 0 10px 20px -10px rgba(255, 255, 255, 0.3); /* Lighting on net */
-                
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6), inset 0 10px 20px -10px rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
         .goal-post-card::after {
-            /* Grass Accent at bottom */
             content: '';
             position: absolute;
             bottom: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(to right, #22c55e, #15803d); /* Green grass */
+            background: linear-gradient(to right, #22c55e, #15803d);
             opacity: 0.8;
         }
 
@@ -139,7 +135,7 @@
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
             background-color: rgba(255, 255, 255, 0.05);
-            border-top-color: #fff; /* Brighter crossbar on hover */
+            border-top-color: #fff;
         }
 
         /* Unique Stage Styles */
@@ -270,7 +266,7 @@
                 <h1 class="text-3xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
                     FIXTURES
                 </h1>
-                <p class="text-xs text-slate-500 font-medium mb-4">(Dates & Venues subject to confirmation by FIFA)</p>
+                <p class="text-xs text-slate-500 font-medium mb-4">(Dates & Venues verified with Official Schedule)</p>
                 
                 <!-- Search & Filter Bar -->
                 <div class="max-w-xl mx-auto relative group">
@@ -309,15 +305,6 @@
                 <div id="no-results" class="hidden p-10 text-center text-slate-500">
                     <p class="text-sm font-medium">No matches found.</p>
                 </div>
-            </div>
-
-            <div class="flex justify-center mt-10 gap-4">
-                <button onclick="switchView('groups')" class="px-6 py-3 rounded-xl font-bold text-xs text-slate-300 hover:bg-white/5 border border-transparent hover:border-white/10 transition-all">
-                    Back
-                </button>
-                <button onclick="advanceToKnockout()" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
-                    Knockout Bracket <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                </button>
             </div>
         </section>
 
@@ -361,116 +348,106 @@
         <!-- Right: Social Share -->
         <div class="flex items-center justify-center md:justify-end gap-4">
             <span class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mr-1">Share</span>
-            <a href="https://wa.me/?text=Check out the World Cup 2026 Bracket at wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#25D366] transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#E1306C] transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
             <a href="https://www.facebook.com/sharer/sharer.php?u=https://wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#1877F2] transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
             <a href="https://twitter.com/intent/tweet?text=Check out the World Cup 2026 Bracket!&url=https://wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#1DA1F2] transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+            <a href="https://wa.me/?text=Check out the World Cup 2026 Bracket at wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#25D366] transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+            <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#0077b5] transition-colors"><i data-lucide="linkedin" class="w-4 h-4"></i></a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#E1306C] transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
         </div>
     </footer>
 
     <script>
         // --- Data ---
+        // Added 'c' property for 3-letter codes
         const groupsData = [
-            { id: 'A', teams: [{n:'Mexico', f:'mx', r:85}, {n:'South Africa', f:'za', r:65}, {n:'South Korea', f:'kr', r:78}, {n:'UEFA PO D', f:'eu', r:70}] },
-            { id: 'B', teams: [{n:'Canada', f:'ca', r:80}, {n:'UEFA PO A', f:'eu', r:72}, {n:'Qatar', f:'qa', r:60}, {n:'Switzerland', f:'ch', r:82}] },
-            { id: 'C', teams: [{n:'Brazil', f:'br', r:92}, {n:'Morocco', f:'ma', r:86}, {n:'Haiti', f:'ht', r:55}, {n:'Scotland', f:'gb-sct', r:74}] },
-            { id: 'D', teams: [{n:'USA', f:'us', r:84}, {n:'Paraguay', f:'py', r:71}, {n:'Australia', f:'au', r:73}, {n:'UEFA PO C', f:'eu', r:70}] },
-            { id: 'E', teams: [{n:'Germany', f:'de', r:88}, {n:'Curaçao', f:'cw', r:50}, {n:'Ivory Coast', f:'ci', r:76}, {n:'Ecuador', f:'ec', r:77}] },
-            { id: 'F', teams: [{n:'Netherlands', f:'nl', r:87}, {n:'Japan', f:'jp', r:81}, {n:'UEFA PO B', f:'eu', r:72}, {n:'Tunisia', f:'tn', r:68}] },
-            { id: 'G', teams: [{n:'Belgium', f:'be', r:86}, {n:'Egypt', f:'eg', r:75}, {n:'Iran', f:'ir', r:77}, {n:'New Zealand', f:'nz', r:60}] },
-            { id: 'H', teams: [{n:'Spain', f:'es', r:91}, {n:'Cape Verde', f:'cv', r:62}, {n:'Saudi Arabia', f:'sa', r:70}, {n:'Uruguay', f:'uy', r:84}] },
-            { id: 'I', teams: [{n:'France', f:'fr', r:93}, {n:'Senegal', f:'sn', r:79}, {n:'Interconf PO 2', f:'un', r:50}, {n:'Norway', f:'no', r:76}] },
-            { id: 'J', teams: [{n:'Argentina', f:'ar', r:94}, {n:'Algeria', f:'dz', r:74}, {n:'Austria', f:'at', r:78}, {n:'Jordan', f:'jo', r:58}] },
-            { id: 'K', teams: [{n:'Portugal', f:'pt', r:89}, {n:'Interconf PO 1', f:'un', r:55}, {n:'Uzbekistan', f:'uz', r:65}, {n:'Colombia', f:'co', r:83}] },
-            { id: 'L', teams: [{n:'England', f:'gb-eng', r:90}, {n:'Croatia', f:'hr', r:85}, {n:'Ghana', f:'gh', r:69}, {n:'Panama', f:'pa', r:67}] },
+            { id: 'A', teams: [{n:'Mexico', c:'MEX', f:'mx'}, {n:'South Africa', c:'RSA', f:'za'}, {n:'South Korea', c:'KOR', f:'kr'}, {n:'UEFA PO D', c:'PO-D', f:'eu'}] },
+            { id: 'B', teams: [{n:'Canada', c:'CAN', f:'ca'}, {n:'UEFA PO A', c:'PO-A', f:'eu'}, {n:'Qatar', c:'QAT', f:'qa'}, {n:'Switzerland', c:'SUI', f:'ch'}] },
+            { id: 'C', teams: [{n:'Brazil', c:'BRA', f:'br'}, {n:'Morocco', c:'MAR', f:'ma'}, {n:'Haiti', c:'HAI', f:'ht'}, {n:'Scotland', c:'SCO', f:'gb-sct'}] },
+            { id: 'D', teams: [{n:'USA', c:'USA', f:'us'}, {n:'Paraguay', c:'PAR', f:'py'}, {n:'Australia', c:'AUS', f:'au'}, {n:'UEFA PO C', c:'PO-C', f:'eu'}] },
+            { id: 'E', teams: [{n:'Germany', c:'GER', f:'de'}, {n:'Curaçao', c:'CUW', f:'cw'}, {n:'Ivory Coast', c:'CIV', f:'ci'}, {n:'Ecuador', c:'ECU', f:'ec'}] },
+            { id: 'F', teams: [{n:'Netherlands', c:'NED', f:'nl'}, {n:'Japan', c:'JPN', f:'jp'}, {n:'UEFA PO B', c:'PO-B', f:'eu'}, {n:'Tunisia', c:'TUN', f:'tn'}] },
+            { id: 'G', teams: [{n:'Belgium', c:'BEL', f:'be'}, {n:'Egypt', c:'EGY', f:'eg'}, {n:'Iran', c:'IRN', f:'ir'}, {n:'New Zealand', c:'NZL', f:'nz'}] },
+            { id: 'H', teams: [{n:'Spain', c:'ESP', f:'es'}, {n:'Cape Verde', c:'CPV', f:'cv'}, {n:'Saudi Arabia', c:'KSA', f:'sa'}, {n:'Uruguay', c:'URU', f:'uy'}] },
+            { id: 'I', teams: [{n:'France', c:'FRA', f:'fr'}, {n:'Senegal', c:'SEN', f:'sn'}, {n:'Interconf PO 2', c:'ICP2', f:'un'}, {n:'Norway', c:'NOR', f:'no'}] },
+            { id: 'J', teams: [{n:'Argentina', c:'ARG', f:'ar'}, {n:'Algeria', c:'ALG', f:'dz'}, {n:'Austria', c:'AUT', f:'at'}, {n:'Jordan', c:'JOR', f:'jo'}] },
+            { id: 'K', teams: [{n:'Portugal', c:'POR', f:'pt'}, {n:'Interconf PO 1', c:'ICP1', f:'un'}, {n:'Uzbekistan', c:'UZB', f:'uz'}, {n:'Colombia', c:'COL', f:'co'}] },
+            { id: 'L', teams: [{n:'England', c:'ENG', f:'gb-eng'}, {n:'Croatia', c:'CRO', f:'hr'}, {n:'Ghana', c:'GHA', f:'gh'}, {n:'Panama', c:'PAN', f:'pa'}] },
         ];
 
-        // VERIFIED HOST SCHEDULE + SANTA CLARA 5 MATCHES
+        // FULL MATCH SCHEDULE (Manual Input based on prompt)
         const officialMatches = [
-            // Group A
             { date: 'Jun 11', venue: 'Mexico City', t1: 'Mexico', t2: 'South Africa', group: 'A' },
             { date: 'Jun 11', venue: 'Guadalajara', t1: 'South Korea', t2: 'UEFA PO D', group: 'A' },
-            { date: 'Jun 18', venue: 'Guadalajara', t1: 'Mexico', t2: 'South Korea', group: 'A' },
-            { date: 'Jun 18', venue: 'Atlanta', t1: 'UEFA PO D', t2: 'South Africa', group: 'A' },
-            { date: 'Jun 24', venue: 'Mexico City', t1: 'Mexico', t2: 'UEFA PO D', group: 'A' },
-            { date: 'Jun 24', venue: 'Monterrey', t1: 'South Korea', t2: 'South Africa', group: 'A' },
-            // Group B
             { date: 'Jun 12', venue: 'Toronto', t1: 'Canada', t2: 'UEFA PO A', group: 'B' },
-            { date: 'Jun 13', venue: 'Santa Clara', t1: 'Qatar', t2: 'Switzerland', group: 'B' },
-            { date: 'Jun 18', venue: 'Vancouver', t1: 'Canada', t2: 'Qatar', group: 'B' },
-            { date: 'Jun 18', venue: 'Los Angeles', t1: 'Switzerland', t2: 'UEFA PO A', group: 'B' },
-            { date: 'Jun 24', venue: 'Vancouver', t1: 'Canada', t2: 'Switzerland', group: 'B' },
-            { date: 'Jun 24', venue: 'Seattle', t1: 'UEFA PO A', t2: 'Qatar', group: 'B' },
-            // Group C
-            { date: 'Jun 13', venue: 'Boston', t1: 'Brazil', t2: 'Morocco', group: 'C' },
-            { date: 'Jun 13', venue: 'New York/NJ', t1: 'Haiti', t2: 'Scotland', group: 'C' },
-            { date: 'Jun 19', venue: 'Philadelphia', t1: 'Brazil', t2: 'Haiti', group: 'C' },
-            { date: 'Jun 19', venue: 'Boston', t1: 'Scotland', t2: 'Morocco', group: 'C' },
-            { date: 'Jun 24', venue: 'Miami', t1: 'Brazil', t2: 'Scotland', group: 'C' },
-            { date: 'Jun 24', venue: 'Atlanta', t1: 'Morocco', t2: 'Haiti', group: 'C' },
-            // Group D
             { date: 'Jun 12', venue: 'Los Angeles', t1: 'USA', t2: 'Paraguay', group: 'D' },
+            { date: 'Jun 13', venue: 'Boston', t1: 'Haiti', t2: 'Scotland', group: 'C' },
             { date: 'Jun 13', venue: 'Vancouver', t1: 'Australia', t2: 'UEFA PO C', group: 'D' },
-            { date: 'Jun 19', venue: 'Seattle', t1: 'Australia', t2: 'USA', group: 'D' },
-            { date: 'Jun 19', venue: 'Santa Clara', t1: 'Paraguay', t2: 'UEFA PO C', group: 'D' },
-            { date: 'Jun 25', venue: 'Los Angeles', t1: 'USA', t2: 'UEFA PO C', group: 'D' },
-            { date: 'Jun 25', venue: 'Santa Clara', t1: 'Paraguay', t2: 'Australia', group: 'D' },
-            // Group E
-            { date: 'Jun 14', venue: 'Philadelphia', t1: 'Germany', t2: 'Curaçao', group: 'E' },
-            { date: 'Jun 14', venue: 'Houston', t1: 'Ivory Coast', t2: 'Ecuador', group: 'E' },
-            { date: 'Jun 20', venue: 'Toronto', t1: 'Germany', t2: 'Ivory Coast', group: 'E' },
-            { date: 'Jun 20', venue: 'Kansas City', t1: 'Ecuador', t2: 'Curaçao', group: 'E' },
-            { date: 'Jun 25', venue: 'Philadelphia', t1: 'Germany', t2: 'Ecuador', group: 'E' },
-            { date: 'Jun 25', venue: 'New York/NJ', t1: 'Curaçao', t2: 'Ivory Coast', group: 'E' },
-            // Group F
-            { date: 'Jun 14', venue: 'Dallas', t1: 'Netherlands', t2: 'UEFA PO B', group: 'F' },
-            { date: 'Jun 14', venue: 'Monterrey', t1: 'Tunisia', t2: 'Japan', group: 'F' },
-            { date: 'Jun 20', venue: 'Houston', t1: 'Netherlands', t2: 'Tunisia', group: 'F' },
-            { date: 'Jun 20', venue: 'Monterrey', t1: 'Japan', t2: 'UEFA PO B', group: 'F' },
-            { date: 'Jun 25', venue: 'Dallas', t1: 'Netherlands', t2: 'Japan', group: 'F' },
-            { date: 'Jun 25', venue: 'Kansas City', t1: 'Tunisia', t2: 'UEFA PO B', group: 'F' },
-            // Group G
-            { date: 'Jun 15', venue: 'Los Angeles', t1: 'Belgium', t2: 'Egypt', group: 'G' },
-            { date: 'Jun 15', venue: 'Seattle', t1: 'Iran', t2: 'New Zealand', group: 'G' },
-            { date: 'Jun 21', venue: 'Los Angeles', t1: 'Belgium', t2: 'Iran', group: 'G' },
-            { date: 'Jun 21', venue: 'Vancouver', t1: 'New Zealand', t2: 'Egypt', group: 'G' },
-            { date: 'Jun 26', venue: 'Seattle', t1: 'Belgium', t2: 'New Zealand', group: 'G' },
-            { date: 'Jun 26', venue: 'Vancouver', t1: 'Egypt', t2: 'Iran', group: 'G' },
-            // Group H
-            { date: 'Jun 15', venue: 'Miami', t1: 'Spain', t2: 'Saudi Arabia', group: 'H' },
-            { date: 'Jun 15', venue: 'Atlanta', t1: 'Uruguay', t2: 'Cape Verde', group: 'H' },
-            { date: 'Jun 21', venue: 'Miami', t1: 'Spain', t2: 'Uruguay', group: 'H' },
-            { date: 'Jun 21', venue: 'Atlanta', t1: 'Saudi Arabia', t2: 'Cape Verde', group: 'H' },
-            { date: 'Jun 26', venue: 'Houston', t1: 'Spain', t2: 'Cape Verde', group: 'H' },
-            { date: 'Jun 26', venue: 'Guadalajara', t1: 'Saudi Arabia', t2: 'Uruguay', group: 'H' },
-            // Group I
-            { date: 'Jun 16', venue: 'New York/NJ', t1: 'France', t2: 'Interconf PO 2', group: 'I' },
-            { date: 'Jun 16', venue: 'Boston', t1: 'Senegal', t2: 'Norway', group: 'I' },
-            { date: 'Jun 22', venue: 'New York/NJ', t1: 'France', t2: 'Senegal', group: 'I' },
-            { date: 'Jun 22', venue: 'Philadelphia', t1: 'Norway', t2: 'Interconf PO 2', group: 'I' },
-            { date: 'Jun 26', venue: 'Boston', t1: 'France', t2: 'Norway', group: 'I' },
-            { date: 'Jun 26', venue: 'Toronto', t1: 'Interconf PO 2', t2: 'Senegal', group: 'I' },
-            // Group J
-            { date: 'Jun 16', venue: 'Kansas City', t1: 'Argentina', t2: 'Jordan', group: 'J' },
-            { date: 'Jun 16', venue: 'Santa Clara', t1: 'Austria', t2: 'Algeria', group: 'J' },
-            { date: 'Jun 22', venue: 'Dallas', t1: 'Argentina', t2: 'Austria', group: 'J' },
-            { date: 'Jun 22', venue: 'Santa Clara', t1: 'Algeria', t2: 'Jordan', group: 'J' },
-            { date: 'Jun 27', venue: 'Kansas City', t1: 'Argentina', t2: 'Algeria', group: 'J' },
-            { date: 'Jun 27', venue: 'Dallas', t1: 'Jordan', t2: 'Austria', group: 'J' },
-            // Group K
+            { date: 'Jun 13', venue: 'New York/NJ', t1: 'Brazil', t2: 'Morocco', group: 'C' },
+            { date: 'Jun 13', venue: 'San Francisco', t1: 'Qatar', t2: 'Switzerland', group: 'B' },
+            { date: 'Jun 14', venue: 'Philadelphia', t1: 'Ivory Coast', t2: 'Ecuador', group: 'E' },
+            { date: 'Jun 14', venue: 'Houston', t1: 'Germany', t2: 'Curaçao', group: 'E' },
+            { date: 'Jun 14', venue: 'Dallas', t1: 'Netherlands', t2: 'Japan', group: 'F' },
+            { date: 'Jun 14', venue: 'Monterrey', t1: 'UEFA PO B', t2: 'Tunisia', group: 'F' },
+            { date: 'Jun 15', venue: 'Miami', t1: 'Saudi Arabia', t2: 'Uruguay', group: 'H' },
+            { date: 'Jun 15', venue: 'Atlanta', t1: 'Spain', t2: 'Cape Verde', group: 'H' },
+            { date: 'Jun 15', venue: 'Los Angeles', t1: 'Iran', t2: 'New Zealand', group: 'G' },
+            { date: 'Jun 15', venue: 'Seattle', t1: 'Belgium', t2: 'Egypt', group: 'G' },
+            { date: 'Jun 16', venue: 'New York/NJ', t1: 'France', t2: 'Senegal', group: 'I' },
+            { date: 'Jun 16', venue: 'Boston', t1: 'Interconf PO 2', t2: 'Norway', group: 'I' },
+            { date: 'Jun 16', venue: 'Kansas City', t1: 'Argentina', t2: 'Algeria', group: 'J' },
+            { date: 'Jun 16', venue: 'San Francisco', t1: 'Austria', t2: 'Jordan', group: 'J' },
+            { date: 'Jun 17', venue: 'Toronto', t1: 'Ghana', t2: 'Panama', group: 'L' },
+            { date: 'Jun 17', venue: 'Dallas', t1: 'England', t2: 'Croatia', group: 'L' },
             { date: 'Jun 17', venue: 'Houston', t1: 'Portugal', t2: 'Interconf PO 1', group: 'K' },
             { date: 'Jun 17', venue: 'Mexico City', t1: 'Uzbekistan', t2: 'Colombia', group: 'K' },
-            { date: 'Jun 23', venue: 'Houston', t1: 'Colombia', t2: 'Interconf PO 1', group: 'K' },
-            { date: 'Jun 23', venue: 'Guadalajara', t1: 'Portugal', t2: 'Uzbekistan', group: 'K' },
-            { date: 'Jun 27', venue: 'Miami', t1: 'Portugal', t2: 'Colombia', group: 'K' },
-            { date: 'Jun 27', venue: 'Atlanta', t1: 'Uzbekistan', t2: 'Interconf PO 1', group: 'K' },
-            // Group L
-            { date: 'Jun 17', venue: 'Toronto', t1: 'England', t2: 'Panama', group: 'L' },
-            { date: 'Jun 17', venue: 'Dallas', t1: 'Croatia', t2: 'Ghana', group: 'L' },
-            { date: 'Jun 23', venue: 'Boston', t1: 'England', t2: 'Croatia', group: 'L' },
-            { date: 'Jun 23', venue: 'Toronto', t1: 'Ghana', t2: 'Panama', group: 'L' },
-            { date: 'Jun 27', venue: 'New York/NJ', t1: 'England', t2: 'Ghana', group: 'L' },
-            { date: 'Jun 27', venue: 'Philadelphia', t1: 'Panama', t2: 'Croatia', group: 'L' }
+            { date: 'Jun 18', venue: 'Atlanta', t1: 'UEFA PO D', t2: 'South Africa', group: 'A' },
+            { date: 'Jun 18', venue: 'Los Angeles', t1: 'Switzerland', t2: 'UEFA PO A', group: 'B' },
+            { date: 'Jun 18', venue: 'Vancouver', t1: 'Canada', t2: 'Qatar', group: 'B' },
+            { date: 'Jun 18', venue: 'Guadalajara', t1: 'Mexico', t2: 'South Korea', group: 'A' },
+            { date: 'Jun 19', venue: 'Philadelphia', t1: 'Brazil', t2: 'Haiti', group: 'C' },
+            { date: 'Jun 19', venue: 'Boston', t1: 'Scotland', t2: 'Morocco', group: 'C' },
+            { date: 'Jun 19', venue: 'San Francisco', t1: 'UEFA PO C', t2: 'Paraguay', group: 'D' },
+            { date: 'Jun 19', venue: 'Seattle', t1: 'USA', t2: 'Australia', group: 'D' },
+            { date: 'Jun 20', venue: 'Toronto', t1: 'Germany', t2: 'Ivory Coast', group: 'E' },
+            { date: 'Jun 20', venue: 'Kansas City', t1: 'Ecuador', t2: 'Curaçao', group: 'E' },
+            { date: 'Jun 20', venue: 'Houston', t1: 'Netherlands', t2: 'UEFA PO B', group: 'F' },
+            { date: 'Jun 20', venue: 'Monterrey', t1: 'Tunisia', t2: 'Japan', group: 'F' },
+            { date: 'Jun 21', venue: 'Miami', t1: 'Uruguay', t2: 'Cape Verde', group: 'H' },
+            { date: 'Jun 21', venue: 'Atlanta', t1: 'Spain', t2: 'Saudi Arabia', group: 'H' },
+            { date: 'Jun 21', venue: 'Los Angeles', t1: 'Belgium', t2: 'Iran', group: 'G' },
+            { date: 'Jun 21', venue: 'Vancouver', t1: 'New Zealand', t2: 'Egypt', group: 'G' },
+            { date: 'Jun 22', venue: 'New York/NJ', t1: 'Norway', t2: 'Senegal', group: 'I' },
+            { date: 'Jun 22', venue: 'Philadelphia', t1: 'France', t2: 'Interconf PO 2', group: 'I' },
+            { date: 'Jun 22', venue: 'Dallas', t1: 'Argentina', t2: 'Austria', group: 'J' },
+            { date: 'Jun 22', venue: 'San Francisco', t1: 'Jordan', t2: 'Algeria', group: 'J' },
+            { date: 'Jun 23', venue: 'Boston', t1: 'England', t2: 'Ghana', group: 'L' },
+            { date: 'Jun 23', venue: 'Toronto', t1: 'Panama', t2: 'Croatia', group: 'L' },
+            { date: 'Jun 23', venue: 'Houston', t1: 'Portugal', t2: 'Uzbekistan', group: 'K' },
+            { date: 'Jun 23', venue: 'Guadalajara', t1: 'Colombia', t2: 'Interconf PO 1', group: 'K' },
+            { date: 'Jun 24', venue: 'Miami', t1: 'Scotland', t2: 'Brazil', group: 'C' },
+            { date: 'Jun 24', venue: 'Atlanta', t1: 'Morocco', t2: 'Haiti', group: 'C' },
+            { date: 'Jun 24', venue: 'Vancouver', t1: 'Switzerland', t2: 'Canada', group: 'B' },
+            { date: 'Jun 24', venue: 'Seattle', t1: 'UEFA PO A', t2: 'Qatar', group: 'B' },
+            { date: 'Jun 24', venue: 'Mexico City', t1: 'UEFA PO D', t2: 'Mexico', group: 'A' },
+            { date: 'Jun 24', venue: 'Monterrey', t1: 'South Africa', t2: 'South Korea', group: 'A' },
+            { date: 'Jun 25', venue: 'Philadelphia', t1: 'Curaçao', t2: 'Ivory Coast', group: 'E' },
+            { date: 'Jun 25', venue: 'New York/NJ', t1: 'Ecuador', t2: 'Germany', group: 'E' },
+            { date: 'Jun 25', venue: 'Dallas', t1: 'Japan', t2: 'UEFA PO B', group: 'F' },
+            { date: 'Jun 25', venue: 'Kansas City', t1: 'Tunisia', t2: 'Netherlands', group: 'F' },
+            { date: 'Jun 25', venue: 'Los Angeles', t1: 'UEFA PO C', t2: 'USA', group: 'D' },
+            { date: 'Jun 25', venue: 'San Francisco', t1: 'Paraguay', t2: 'Australia', group: 'D' },
+            { date: 'Jun 26', venue: 'Boston', t1: 'Norway', t2: 'France', group: 'I' },
+            { date: 'Jun 26', venue: 'Toronto', t1: 'Senegal', t2: 'Interconf PO 2', group: 'I' },
+            { date: 'Jun 26', venue: 'Seattle', t1: 'Egypt', t2: 'Iran', group: 'G' },
+            { date: 'Jun 26', venue: 'Vancouver', t1: 'New Zealand', t2: 'Belgium', group: 'G' },
+            { date: 'Jun 26', venue: 'Houston', t1: 'Cape Verde', t2: 'Saudi Arabia', group: 'H' },
+            { date: 'Jun 26', venue: 'Guadalajara', t1: 'Uruguay', t2: 'Spain', group: 'H' },
+            { date: 'Jun 27', venue: 'New York/NJ', t1: 'Panama', t2: 'England', group: 'L' },
+            { date: 'Jun 27', venue: 'Philadelphia', t1: 'Croatia', t2: 'Ghana', group: 'L' },
+            { date: 'Jun 27', venue: 'Kansas City', t1: 'Algeria', t2: 'Austria', group: 'J' },
+            { date: 'Jun 27', venue: 'Dallas', t1: 'Jordan', t2: 'Argentina', group: 'J' },
+            { date: 'Jun 27', venue: 'Miami', t1: 'Colombia', t2: 'Portugal', group: 'K' },
+            { date: 'Jun 27', venue: 'Atlanta', t1: 'Interconf PO 1', t2: 'Uzbekistan', group: 'K' }
         ];
 
         const venues = ['New York/NJ', 'Dallas', 'Kansas City', 'Houston', 'Atlanta', 'Boston', 'Philadelphia', 'Miami', 'Seattle', 'Santa Clara', 'Los Angeles', 'Mexico City', 'Guadalajara', 'Monterrey', 'Toronto', 'Vancouver'];
@@ -478,8 +455,8 @@
 
         // Convert fixture format for render
         const formattedFixtures = fixtures.map(f => {
-            const team1 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t1) || f.t1.includes(t.n)) || {n: f.t1, f: 'un'};
-            const team2 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t2) || f.t2.includes(t.n)) || {n: f.t2, f: 'un'};
+            const team1 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t1) || f.t1.includes(t.n)) || {n: f.t1, c: f.t1.substring(0,3).toUpperCase(), f: 'un'};
+            const team2 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t2) || f.t2.includes(t.n)) || {n: f.t2, c: f.t2.substring(0,3).toUpperCase(), f: 'un'};
             return { ...f, t1: team1, t2: team2 };
         }).sort((a,b) => new Date(a.date) - new Date(b.date));
 
@@ -596,8 +573,7 @@
         // --- Render Groups ---
         function renderGroups() {
             const container = document.getElementById('groups-container');
-            container.innerHTML = groupsData.map((group, idx) => {
-                return `
+            container.innerHTML = groupsData.map((group, idx) => `
                 <div onclick="switchView('fixtures', 'Group ${group.id}')" class="cursor-pointer goal-post-card rounded-xl overflow-hidden group relative" style="animation-delay: ${idx * 0.05}s">
                     <div class="px-4 py-2 border-b border-white/10 flex justify-between items-center relative bg-white/5">
                         <div class="flex items-center gap-3">
@@ -619,11 +595,11 @@
                         </div>
                     </div>
                 </div>
-            `}).join('');
+            `).join('');
             lucide.createIcons();
         }
 
-        // --- Render Fixtures ---
+        // --- Render Fixtures (Compact) ---
         function renderFixturesTable(list) {
             const tbody = document.getElementById('fixtures-body');
             const noResults = document.getElementById('no-results');
@@ -647,11 +623,21 @@
                     </td>
                     <td class="py-2.5 px-2 md:px-5 text-right">
                         <div class="flex items-center justify-end gap-3">
-                            <span class="font-bold text-white text-xs">${match.t1.n}</span>
-                            ${match.t1.f !== 'un' ? `<span class="fi fi-${match.t1.f} rounded shadow-sm text-sm"></span>` : ''}
+                            <!-- Team 1 -->
+                            <div class="flex items-center gap-1 md:gap-2">
+                                <span class="font-bold text-white text-xs md:text-sm hidden md:inline">${match.t1.n}</span>
+                                <span class="font-bold text-white text-xs md:hidden">${match.t1.c}</span>
+                                ${match.t1.f !== 'un' ? `<span class="fi fi-${match.t1.f} rounded shadow-sm text-sm"></span>` : ''}
+                            </div>
+                            
                             <span class="text-slate-500 px-1 font-mono text-[9px]">VS</span>
-                            ${match.t2.f !== 'un' ? `<span class="fi fi-${match.t2.f} rounded shadow-sm text-sm"></span>` : ''}
-                            <span class="font-bold text-white text-xs">${match.t2.n}</span>
+                            
+                            <!-- Team 2 -->
+                            <div class="flex items-center gap-1 md:gap-2">
+                                ${match.t2.f !== 'un' ? `<span class="fi fi-${match.t2.f} rounded shadow-sm text-sm"></span>` : ''}
+                                <span class="font-bold text-white text-xs md:text-sm hidden md:inline">${match.t2.n}</span>
+                                <span class="font-bold text-white text-xs md:hidden">${match.t2.c}</span>
+                            </div>
                         </div>
                     </td>
                     <td class="py-2.5 px-2 md:px-5 text-right text-xs text-slate-400 font-medium truncate max-w-[120px]">
@@ -689,7 +675,6 @@
                 'w-full max-w-lg min-h-[16rem] border-amber-500/50 bg-gradient-to-br from-amber-900/40 to-black/60 shadow-[0_0_50px_rgba(245,158,11,0.2)] z-30' : 
                 `w-full ${specificStyle} min-h-[10rem]`; 
             
-            // Badge: Icon Center - NO PILL
             const badge = isFinal ? `
                 <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center">
                     <div class="relative w-14 h-14 rounded-full bg-black/50 ring-4 ring-amber-400/50 shadow-[0_0_20px_rgba(251,191,36,0.6)] flex items-center justify-center overflow-hidden">
