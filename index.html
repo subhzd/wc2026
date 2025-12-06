@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026.png">
-	<meta property="og:title" content="WC 2026" />
 	<link rel="icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026.png" />
-	<meta property="og:image" content="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026_og.png" />	
-	    
+    
     <title>World Cup 2026</title>
     <!-- Tailwind CSS -->
     <script src="cdn.tailwindcss.com"></script>
@@ -92,6 +89,51 @@
             box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.4);
         }
 
+        /* --- Goal Post Card Styling --- */
+        .goal-post-card {
+            /* The Frame */
+            border-top: 6px solid rgba(255, 255, 255, 0.9); /* Crossbar */
+            border-left: 3px solid rgba(255, 255, 255, 0.3); /* Left Post */
+            border-right: 3px solid rgba(255, 255, 255, 0.3); /* Right Post */
+            border-bottom: none; /* Open bottom */
+            border-radius: 12px 12px 4px 4px;
+            
+            /* The Net Background */
+            background-color: rgba(255, 255, 255, 0.02);
+            background-image: 
+                linear-gradient(30deg, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(150deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            
+            backdrop-filter: blur(12px);
+            box-shadow: 
+                0 20px 40px -10px rgba(0, 0, 0, 0.6), /* Deep shadow */
+                inset 0 10px 20px -10px rgba(255, 255, 255, 0.3); /* Lighting on net */
+                
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .goal-post-card::after {
+            /* Grass Accent at bottom */
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, #22c55e, #15803d); /* Green grass */
+            opacity: 0.8;
+        }
+
+        .goal-post-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            background-color: rgba(255, 255, 255, 0.05);
+            border-top-color: #fff; /* Brighter crossbar on hover */
+        }
+
         /* Unique Stage Styles */
         .card-qf {
             background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(88, 28, 135, 0.3));
@@ -134,7 +176,7 @@
         .bracket-stage:last-child::after { display: none; }
     </style>
 </head>
-<body class="text-slate-100 font-sans overflow-x-hidden selection:bg-pink-500/30">
+<body class="text-slate-100 font-sans overflow-x-hidden w-full selection:bg-pink-500/30">
 
     <!-- Background Blobs for Atmosphere -->
     <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
@@ -195,12 +237,12 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="w-full mx-auto py-8 px-4 sm:px-6 relative z-10">
+    <main class="w-full mx-auto py-8 px-4 sm:px-6 relative z-10 overflow-x-hidden">
 
         <!-- Phase 1: Groups View (Compact) -->
         <section id="view-groups" class="view-section active max-w-7xl mx-auto">
             <div class="text-center mb-10 relative">
-                <h1 class="text-4xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
+                <h1 class="text-3xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
                     GROUPS
                 </h1>
                 <p class="text-sm text-slate-400 font-light uppercase tracking-widest mb-6">
@@ -217,7 +259,7 @@
         <!-- Phase 2: Fixtures View (Compact) -->
         <section id="view-fixtures" class="view-section hidden max-w-5xl mx-auto">
             <div class="text-center mb-8">
-                <h1 class="text-4xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
+                <h1 class="text-3xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
                     FIXTURES
                 </h1>
                 <p class="text-xs text-slate-500 font-medium mb-4">(Dates & Venues subject to confirmation by FIFA)</p>
@@ -244,10 +286,10 @@
                     <table class="w-full text-left border-collapse">
                         <thead>
                             <tr class="bg-black/30 border-b border-white/5">
-                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Date</th>
-                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Grp</th>
-                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Matchup</th>
-                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Venue</th>
+                                <th class="py-3 px-2 md:px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Date</th>
+                                <th class="py-3 px-2 md:px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Grp</th>
+                                <th class="py-3 px-2 md:px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Matchup</th>
+                                <th class="py-3 px-2 md:px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Venue</th>
                             </tr>
                         </thead>
                         <tbody id="fixtures-body" class="divide-y divide-white/5">
@@ -274,7 +316,7 @@
         <!-- Phase 3: Bracket View (Vertical Design) -->
         <section id="view-bracket" class="view-section hidden">
             <div class="text-center mb-16">
-                <h1 class="text-5xl md:text-4xl font-black mb-4 tracking-tight text-white drop-shadow-2xl italic">
+                <h1 class="text-3xl md:text-4xl font-black mb-4 tracking-tight text-white drop-shadow-2xl italic">
                     KNOCKOUT
                 </h1>
                 <p class="text-slate-400 text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2">
@@ -319,8 +361,7 @@
     </footer>
 
     <script>
-        // --- Data with Rating (Approximation for Forecast) ---
-        // r = rating out of 100 based on recent form/FIFA rank tiers
+        // --- Data ---
         const groupsData = [
             { id: 'A', teams: [{n:'Mexico', f:'mx', r:85}, {n:'South Africa', f:'za', r:65}, {n:'South Korea', f:'kr', r:78}, {n:'UEFA PO D', f:'eu', r:70}] },
             { id: 'B', teams: [{n:'Canada', f:'ca', r:80}, {n:'UEFA PO A', f:'eu', r:72}, {n:'Qatar', f:'qa', r:60}, {n:'Switzerland', f:'ch', r:82}] },
@@ -484,6 +525,10 @@
             103: { id: 103, round: '3rd', date: 'July 18', venue: 'Miami', t1: getTeam('Loser M101'), t2: getTeam('Loser M102') }
         };
 
+        // --- State ---
+        let showPredictions = false;
+        let predictions = {};
+
         // --- View Logic ---
         function switchView(viewName, filterQuery = null, updateHistory = true) {
             document.querySelectorAll('.view-section').forEach(el => {
@@ -545,7 +590,7 @@
             const container = document.getElementById('groups-container');
             container.innerHTML = groupsData.map((group, idx) => {
                 return `
-                <div onclick="switchView('fixtures', 'Group ${group.id}')" class="cursor-pointer glass-card rounded-xl overflow-hidden group relative" style="animation-delay: ${idx * 0.05}s">
+                <div onclick="switchView('fixtures', 'Group ${group.id}')" class="cursor-pointer goal-post-card rounded-xl overflow-hidden group relative" style="animation-delay: ${idx * 0.05}s">
                     <div class="px-4 py-2 border-b border-white/10 flex justify-between items-center relative bg-white/5">
                         <div class="flex items-center gap-3">
                             <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-md group-hover:scale-110 transition-transform">
@@ -555,20 +600,15 @@
                         </div>
                         <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
                     </div>
-                    <div class="p-2">
-                        <table class="w-full">
-                            <tbody class="text-xs">
-                                ${group.teams.map((team, i) => {
-                                    return `
-                                    <tr onclick="event.stopPropagation(); switchView('fixtures', '${team.n}')" class="transition-all rounded cursor-pointer hover:bg-white/5">
-                                        <td class="py-1.5 px-3 flex items-center gap-3 font-medium text-slate-300">
-                                            ${team.f !== 'un' ? `<span class="fi fi-${team.f} text-base rounded shadow-sm"></span>` : `<i data-lucide="globe" class="w-4 h-4 text-slate-500"></i>`}
-                                            <span class="truncate tracking-wide flex-grow">${team.n}</span>
-                                        </td>
-                                    </tr>
-                                `}).join('')}
-                            </tbody>
-                        </table>
+                    <div class="p-3">
+                        <div class="grid grid-cols-2 gap-2">
+                            ${group.teams.map((team) => `
+                                <div onclick="event.stopPropagation(); switchView('fixtures', '${team.n}')" class="flex flex-col items-center justify-center p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-all cursor-pointer border border-white/5">
+                                     ${team.f !== 'un' ? `<span class="fi fi-${team.f} text-2xl rounded shadow-sm mb-1"></span>` : `<i data-lucide="globe" class="w-6 h-6 text-slate-500 mb-1"></i>`}
+                                     <span class="text-[10px] font-bold text-slate-200 text-center leading-tight">${team.n}</span>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 </div>
             `}).join('');
@@ -589,15 +629,15 @@
             noResults.classList.add('hidden');
             tbody.innerHTML = list.map(match => `
                 <tr class="hover:bg-white/5 transition-colors group border-b border-white/5 last:border-0">
-                    <td class="py-2.5 px-5 text-xs font-semibold text-slate-300 whitespace-nowrap">
+                    <td class="py-2.5 px-2 md:px-5 text-xs font-semibold text-slate-300 whitespace-nowrap">
                         ${match.date}
                     </td>
-                    <td class="py-2.5 px-5">
+                    <td class="py-2.5 px-2 md:px-5">
                         <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold text-[10px]">
                             ${match.group}
                         </span>
                     </td>
-                    <td class="py-2.5 px-5 text-right">
+                    <td class="py-2.5 px-2 md:px-5 text-right">
                         <div class="flex items-center justify-end gap-3">
                             <span class="font-bold text-white text-xs">${match.t1.n}</span>
                             ${match.t1.f !== 'un' ? `<span class="fi fi-${match.t1.f} rounded shadow-sm text-sm"></span>` : ''}
@@ -606,7 +646,7 @@
                             <span class="font-bold text-white text-xs">${match.t2.n}</span>
                         </div>
                     </td>
-                    <td class="py-2.5 px-5 text-right text-xs text-slate-400 font-medium truncate max-w-[120px]">
+                    <td class="py-2.5 px-2 md:px-5 text-right text-xs text-slate-400 font-medium truncate max-w-[120px]">
                         ${match.venue}
                     </td>
                 </tr>
@@ -772,9 +812,5 @@
             window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
         });
     </script>
-
-    <script>window.va=window.va||function(){(window.va.q=window.va.q||[]).push(arguments)};</script><script src="/_vercel/insights/script.js"></script>
-	<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script><script src="/_vercel/speed-insights/script.js"></script>	
-        
 </body>
 </html>
