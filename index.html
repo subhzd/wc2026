@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026.png">
+	<meta property="og:title" content="WC 2026" />
+	<link rel="icon" href="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026.png" />
+	<meta property="og:image" content="https://raw.githubusercontent.com/subhzd/icons/refs/heads/main/fifa2026_og.png" />	
+	    
+    <title>World Cup 2026</title>
+    <!-- Tailwind CSS -->
+    <script src="cdn.tailwindcss.com"></script>
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        glass: {
+                            100: 'rgba(255, 255, 255, 0.1)',
+                            200: 'rgba(255, 255, 255, 0.2)',
+                            300: 'rgba(255, 255, 255, 0.3)',
+                            dark: 'rgba(15, 23, 42, 0.6)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'pulse-glow': 'pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: 1, boxShadow: '0 0 25px currentColor' },
+                            '50%': { opacity: .8, boxShadow: '0 0 10px currentColor' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Icons -->
+    <script src="lucide@latest"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.11.0/css/flag-icons.min.css"/>
+    <style>
+        /* Animated Mesh Gradient Background */
+        body {
+            background-color: #0f172a;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .glass-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card:hover {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.4);
+        }
+
+        /* Unique Stage Styles */
+        .card-qf {
+            background: linear-gradient(135deg, rgba(147, 51, 234, 0.15), rgba(88, 28, 135, 0.3));
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 25px rgba(147, 51, 234, 0.1);
+        }
+        .card-sf {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(157, 23, 77, 0.3));
+            border-color: rgba(236, 72, 153, 0.3);
+            box-shadow: 0 0 30px rgba(236, 72, 153, 0.15);
+        }
+
+        /* Scrollbar */
+        .custom-scrollbar::-webkit-scrollbar { height: 10px; width: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.2); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 10px; border: 2px solid transparent; background-clip: content-box; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.4); }
+
+        /* Animation Canvas */
+        #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; opacity: 0.6; }
+
+        /* Smooth Transitions */
+        .view-section { display: none; opacity: 0; transition: opacity 0.5s ease-in-out; }
+        .view-section.active { display: block; opacity: 1; }
+        
+        .team-name { max-width: 140px; }
+        
+        /* Vertical Bracket Flow */
+        .bracket-stage { position: relative; }
+        .bracket-stage::after {
+            content: '';
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-50%);
+        }
+        .bracket-stage:last-child::after { display: none; }
+    </style>
+</head>
+<body class="text-slate-100 font-sans overflow-x-hidden selection:bg-pink-500/30">
+
+    <!-- Background Blobs for Atmosphere -->
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-96 h-96 bg-purple-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-32 left-1/3 w-96 h-96 bg-pink-500/20 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header / Nav -->
+    <nav class="sticky top-0 z-50 glass-panel border-b-0">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand -->
+                <div class="flex items-center gap-4 cursor-pointer group" onclick="switchView('groups')">
+                    <div class="relative w-8 h-8 flex items-center justify-center bg-white/10 rounded-lg border border-white/20 shadow-lg group-hover:scale-110 transition-transform duration-300 backdrop-blur-md overflow-hidden">
+                        <!-- Custom FIFA Icon -->
+                        <img src="fifa2026.png" alt="FIFA" class="w-full h-full object-cover" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <i data-lucide="trophy" class="w-4 h-4 text-yellow-400 animate-pulse-slow hidden"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
+                            WC 2026
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Center Nav Pills -->
+                <div class="hidden md:flex bg-black/20 p-1 rounded-full border border-white/10 backdrop-blur-md">
+                    <button onclick="switchView('groups')" class="nav-btn px-5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 hover:bg-white/10 text-slate-300" data-view="groups">
+                        Groups
+                    </button>
+                    <button onclick="switchView('fixtures')" class="nav-btn px-5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 hover:bg-white/10 text-slate-300" data-view="fixtures">
+                        Matches
+                    </button>
+                    <button onclick="switchView('bracket')" class="nav-btn px-5 py-1.5 rounded-full text-xs font-bold transition-all duration-300 hover:bg-white/10 text-slate-300" data-view="bracket">
+                        Knockout
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-2">
+                    <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg hover:bg-white/10 text-white">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full glass-panel border-t-0 shadow-xl z-50">
+            <div class="p-4 space-y-2">
+                <button onclick="switchView('groups')" class="w-full text-left p-3 rounded-lg font-bold hover:bg-white/10 text-slate-200">Groups</button>
+                <button onclick="switchView('fixtures')" class="w-full text-left p-3 rounded-lg font-bold hover:bg-white/10 text-slate-200">Matches</button>
+                <button onclick="switchView('bracket')" class="w-full text-left p-3 rounded-lg font-bold hover:bg-white/10 text-slate-200">Knockout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="w-full mx-auto py-8 px-4 sm:px-6 relative z-10">
+
+        <!-- Phase 1: Groups View (Compact) -->
+        <section id="view-groups" class="view-section active max-w-7xl mx-auto">
+            <div class="text-center mb-10 relative">
+                <h1 class="text-4xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
+                    GROUPS
+                </h1>
+                <p class="text-sm text-slate-400 font-light uppercase tracking-widest mb-6">
+                    Phase 1 • 48 Teams
+                </p>
+            </div>
+            
+            <!-- Groups Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 mb-12" id="groups-container">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+        <!-- Phase 2: Fixtures View (Compact) -->
+        <section id="view-fixtures" class="view-section hidden max-w-5xl mx-auto">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-4xl font-black mb-2 tracking-tight text-white drop-shadow-xl italic">
+                    FIXTURES
+                </h1>
+                <p class="text-xs text-slate-500 font-medium mb-4">(Dates & Venues subject to confirmation by FIFA)</p>
+                
+                <!-- Search & Filter Bar -->
+                <div class="max-w-xl mx-auto relative group">
+                    <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
+                    </div>
+                    <input type="text" id="fixture-search" placeholder="Filter by team or venue..." 
+                        class="w-full pl-10 pr-10 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-500 outline-none focus:bg-white/10 focus:border-white/30 focus:ring-2 focus:ring-blue-500/20 transition-all text-sm font-medium backdrop-blur-xl shadow-lg"
+                        onkeyup="filterFixtures()">
+                    <div class="absolute right-3 top-3">
+                        <button onclick="clearFilter()" id="clear-btn" class="hidden p-0.5 rounded-full hover:bg-white/10 text-slate-400 transition-colors">
+                            <i data-lucide="x" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matches Table -->
+            <div class="glass-panel rounded-2xl overflow-hidden border-t-0">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-black/30 border-b border-white/5">
+                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Date</th>
+                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400">Grp</th>
+                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Matchup</th>
+                                <th class="py-3 px-5 font-bold text-[10px] uppercase tracking-wider text-slate-400 text-right">Venue</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fixtures-body" class="divide-y divide-white/5">
+                            <!-- Injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+                <!-- Empty State -->
+                <div id="no-results" class="hidden p-10 text-center text-slate-500">
+                    <p class="text-sm font-medium">No matches found.</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center mt-10 gap-4">
+                <button onclick="switchView('groups')" class="px-6 py-3 rounded-xl font-bold text-xs text-slate-300 hover:bg-white/5 border border-transparent hover:border-white/10 transition-all">
+                    Back
+                </button>
+                <button onclick="advanceToKnockout()" class="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white rounded-xl font-bold text-xs shadow-lg hover:shadow-blue-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                    Knockout Bracket <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Phase 3: Bracket View (Vertical Design) -->
+        <section id="view-bracket" class="view-section hidden">
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-4xl font-black mb-4 tracking-tight text-white drop-shadow-2xl italic">
+                    KNOCKOUT
+                </h1>
+                <p class="text-slate-400 text-xs uppercase tracking-widest font-bold flex items-center justify-center gap-2">
+                    Official Path to the Final (Subject to confirmation)
+                </p>
+            </div>
+
+            <!-- Vertical Flow Container -->
+            <div class="max-w-7xl mx-auto px-4 space-y-16 pb-20" id="vertical-bracket-root">
+                <!-- Injected via JS -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer (Slim & Redesigned) -->
+    <footer class="border-t border-white/5 bg-black/40 backdrop-blur-md py-3 px-6 relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+        <!-- Left: Hosts & Info -->
+        <div class="flex items-center justify-center md:justify-start gap-4">
+            <div class="flex gap-2">
+                <span class="fi fi-ca text-lg rounded shadow-sm opacity-90"></span>
+                <span class="fi fi-mx text-lg rounded shadow-sm opacity-90"></span>
+                <span class="fi fi-us text-lg rounded shadow-sm opacity-90"></span>
+            </div>
+            <div class="h-4 w-px bg-white/10 mx-1"></div>
+            <p class="text-[9px] font-bold text-slate-500 uppercase tracking-widest">WORLD CUP 2026 VISUALIZATION</p>
+        </div>
+
+        <!-- Center: Credits -->
+        <div class="flex justify-center">
+             <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Designed by AI Maverick</p>
+        </div>
+
+        <!-- Right: Social Share -->
+        <div class="flex items-center justify-center md:justify-end gap-4">
+            <span class="text-[9px] font-bold text-slate-600 uppercase tracking-widest mr-1">Share</span>
+            <a href="https://wa.me/?text=Check out the World Cup 2026 Bracket at wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#25D366] transition-colors"><i data-lucide="message-circle" class="w-4 h-4"></i></a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#E1306C] transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https://wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#1877F2] transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+            <a href="https://twitter.com/intent/tweet?text=Check out the World Cup 2026 Bracket!&url=https://wc2026.aimaverick.me" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-[#1DA1F2] transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // --- Data with Rating (Approximation for Forecast) ---
+        // r = rating out of 100 based on recent form/FIFA rank tiers
+        const groupsData = [
+            { id: 'A', teams: [{n:'Mexico', f:'mx', r:85}, {n:'South Africa', f:'za', r:65}, {n:'South Korea', f:'kr', r:78}, {n:'UEFA PO D', f:'eu', r:70}] },
+            { id: 'B', teams: [{n:'Canada', f:'ca', r:80}, {n:'UEFA PO A', f:'eu', r:72}, {n:'Qatar', f:'qa', r:60}, {n:'Switzerland', f:'ch', r:82}] },
+            { id: 'C', teams: [{n:'Brazil', f:'br', r:92}, {n:'Morocco', f:'ma', r:86}, {n:'Haiti', f:'ht', r:55}, {n:'Scotland', f:'gb-sct', r:74}] },
+            { id: 'D', teams: [{n:'USA', f:'us', r:84}, {n:'Paraguay', f:'py', r:71}, {n:'Australia', f:'au', r:73}, {n:'UEFA PO C', f:'eu', r:70}] },
+            { id: 'E', teams: [{n:'Germany', f:'de', r:88}, {n:'Curaçao', f:'cw', r:50}, {n:'Ivory Coast', f:'ci', r:76}, {n:'Ecuador', f:'ec', r:77}] },
+            { id: 'F', teams: [{n:'Netherlands', f:'nl', r:87}, {n:'Japan', f:'jp', r:81}, {n:'UEFA PO B', f:'eu', r:72}, {n:'Tunisia', f:'tn', r:68}] },
+            { id: 'G', teams: [{n:'Belgium', f:'be', r:86}, {n:'Egypt', f:'eg', r:75}, {n:'Iran', f:'ir', r:77}, {n:'New Zealand', f:'nz', r:60}] },
+            { id: 'H', teams: [{n:'Spain', f:'es', r:91}, {n:'Cape Verde', f:'cv', r:62}, {n:'Saudi Arabia', f:'sa', r:70}, {n:'Uruguay', f:'uy', r:84}] },
+            { id: 'I', teams: [{n:'France', f:'fr', r:93}, {n:'Senegal', f:'sn', r:79}, {n:'Interconf PO 2', f:'un', r:50}, {n:'Norway', f:'no', r:76}] },
+            { id: 'J', teams: [{n:'Argentina', f:'ar', r:94}, {n:'Algeria', f:'dz', r:74}, {n:'Austria', f:'at', r:78}, {n:'Jordan', f:'jo', r:58}] },
+            { id: 'K', teams: [{n:'Portugal', f:'pt', r:89}, {n:'Interconf PO 1', f:'un', r:55}, {n:'Uzbekistan', f:'uz', r:65}, {n:'Colombia', f:'co', r:83}] },
+            { id: 'L', teams: [{n:'England', f:'gb-eng', r:90}, {n:'Croatia', f:'hr', r:85}, {n:'Ghana', f:'gh', r:69}, {n:'Panama', f:'pa', r:67}] },
+        ];
+
+        // VERIFIED HOST SCHEDULE + SANTA CLARA 5 MATCHES
+        const officialMatches = [
+            // Group A
+            { date: 'Jun 11', venue: 'Mexico City', t1: 'Mexico', t2: 'South Africa', group: 'A' },
+            { date: 'Jun 11', venue: 'Guadalajara', t1: 'South Korea', t2: 'UEFA PO D', group: 'A' },
+            { date: 'Jun 18', venue: 'Guadalajara', t1: 'Mexico', t2: 'South Korea', group: 'A' },
+            { date: 'Jun 18', venue: 'Atlanta', t1: 'UEFA PO D', t2: 'South Africa', group: 'A' },
+            { date: 'Jun 24', venue: 'Mexico City', t1: 'Mexico', t2: 'UEFA PO D', group: 'A' },
+            { date: 'Jun 24', venue: 'Monterrey', t1: 'South Korea', t2: 'South Africa', group: 'A' },
+            // Group B
+            { date: 'Jun 12', venue: 'Toronto', t1: 'Canada', t2: 'UEFA PO A', group: 'B' },
+            { date: 'Jun 13', venue: 'Santa Clara', t1: 'Qatar', t2: 'Switzerland', group: 'B' },
+            { date: 'Jun 18', venue: 'Vancouver', t1: 'Canada', t2: 'Qatar', group: 'B' },
+            { date: 'Jun 18', venue: 'Los Angeles', t1: 'Switzerland', t2: 'UEFA PO A', group: 'B' },
+            { date: 'Jun 24', venue: 'Vancouver', t1: 'Canada', t2: 'Switzerland', group: 'B' },
+            { date: 'Jun 24', venue: 'Seattle', t1: 'UEFA PO A', t2: 'Qatar', group: 'B' },
+            // Group C
+            { date: 'Jun 13', venue: 'Boston', t1: 'Brazil', t2: 'Morocco', group: 'C' },
+            { date: 'Jun 13', venue: 'New York/NJ', t1: 'Haiti', t2: 'Scotland', group: 'C' },
+            { date: 'Jun 19', venue: 'Philadelphia', t1: 'Brazil', t2: 'Haiti', group: 'C' },
+            { date: 'Jun 19', venue: 'Boston', t1: 'Scotland', t2: 'Morocco', group: 'C' },
+            { date: 'Jun 24', venue: 'Miami', t1: 'Brazil', t2: 'Scotland', group: 'C' },
+            { date: 'Jun 24', venue: 'Atlanta', t1: 'Morocco', t2: 'Haiti', group: 'C' },
+            // Group D
+            { date: 'Jun 12', venue: 'Los Angeles', t1: 'USA', t2: 'Paraguay', group: 'D' },
+            { date: 'Jun 13', venue: 'Vancouver', t1: 'Australia', t2: 'UEFA PO C', group: 'D' },
+            { date: 'Jun 19', venue: 'Seattle', t1: 'Australia', t2: 'USA', group: 'D' },
+            { date: 'Jun 19', venue: 'Santa Clara', t1: 'Paraguay', t2: 'UEFA PO C', group: 'D' },
+            { date: 'Jun 25', venue: 'Los Angeles', t1: 'USA', t2: 'UEFA PO C', group: 'D' },
+            { date: 'Jun 25', venue: 'Santa Clara', t1: 'Paraguay', t2: 'Australia', group: 'D' },
+            // Group E
+            { date: 'Jun 14', venue: 'Philadelphia', t1: 'Germany', t2: 'Curaçao', group: 'E' },
+            { date: 'Jun 14', venue: 'Houston', t1: 'Ivory Coast', t2: 'Ecuador', group: 'E' },
+            { date: 'Jun 20', venue: 'Toronto', t1: 'Germany', t2: 'Ivory Coast', group: 'E' },
+            { date: 'Jun 20', venue: 'Kansas City', t1: 'Ecuador', t2: 'Curaçao', group: 'E' },
+            { date: 'Jun 25', venue: 'Philadelphia', t1: 'Germany', t2: 'Ecuador', group: 'E' },
+            { date: 'Jun 25', venue: 'New York/NJ', t1: 'Curaçao', t2: 'Ivory Coast', group: 'E' },
+            // Group F
+            { date: 'Jun 14', venue: 'Dallas', t1: 'Netherlands', t2: 'UEFA PO B', group: 'F' },
+            { date: 'Jun 14', venue: 'Monterrey', t1: 'Tunisia', t2: 'Japan', group: 'F' },
+            { date: 'Jun 20', venue: 'Houston', t1: 'Netherlands', t2: 'Tunisia', group: 'F' },
+            { date: 'Jun 20', venue: 'Monterrey', t1: 'Japan', t2: 'UEFA PO B', group: 'F' },
+            { date: 'Jun 25', venue: 'Dallas', t1: 'Netherlands', t2: 'Japan', group: 'F' },
+            { date: 'Jun 25', venue: 'Kansas City', t1: 'Tunisia', t2: 'UEFA PO B', group: 'F' },
+            // Group G
+            { date: 'Jun 15', venue: 'Los Angeles', t1: 'Belgium', t2: 'Egypt', group: 'G' },
+            { date: 'Jun 15', venue: 'Seattle', t1: 'Iran', t2: 'New Zealand', group: 'G' },
+            { date: 'Jun 21', venue: 'Los Angeles', t1: 'Belgium', t2: 'Iran', group: 'G' },
+            { date: 'Jun 21', venue: 'Vancouver', t1: 'New Zealand', t2: 'Egypt', group: 'G' },
+            { date: 'Jun 26', venue: 'Seattle', t1: 'Belgium', t2: 'New Zealand', group: 'G' },
+            { date: 'Jun 26', venue: 'Vancouver', t1: 'Egypt', t2: 'Iran', group: 'G' },
+            // Group H
+            { date: 'Jun 15', venue: 'Miami', t1: 'Spain', t2: 'Saudi Arabia', group: 'H' },
+            { date: 'Jun 15', venue: 'Atlanta', t1: 'Uruguay', t2: 'Cape Verde', group: 'H' },
+            { date: 'Jun 21', venue: 'Miami', t1: 'Spain', t2: 'Uruguay', group: 'H' },
+            { date: 'Jun 21', venue: 'Atlanta', t1: 'Saudi Arabia', t2: 'Cape Verde', group: 'H' },
+            { date: 'Jun 26', venue: 'Houston', t1: 'Spain', t2: 'Cape Verde', group: 'H' },
+            { date: 'Jun 26', venue: 'Guadalajara', t1: 'Saudi Arabia', t2: 'Uruguay', group: 'H' },
+            // Group I
+            { date: 'Jun 16', venue: 'New York/NJ', t1: 'France', t2: 'Interconf PO 2', group: 'I' },
+            { date: 'Jun 16', venue: 'Boston', t1: 'Senegal', t2: 'Norway', group: 'I' },
+            { date: 'Jun 22', venue: 'New York/NJ', t1: 'France', t2: 'Senegal', group: 'I' },
+            { date: 'Jun 22', venue: 'Philadelphia', t1: 'Norway', t2: 'Interconf PO 2', group: 'I' },
+            { date: 'Jun 26', venue: 'Boston', t1: 'France', t2: 'Norway', group: 'I' },
+            { date: 'Jun 26', venue: 'Toronto', t1: 'Interconf PO 2', t2: 'Senegal', group: 'I' },
+            // Group J
+            { date: 'Jun 16', venue: 'Kansas City', t1: 'Argentina', t2: 'Jordan', group: 'J' },
+            { date: 'Jun 16', venue: 'Santa Clara', t1: 'Austria', t2: 'Algeria', group: 'J' },
+            { date: 'Jun 22', venue: 'Dallas', t1: 'Argentina', t2: 'Austria', group: 'J' },
+            { date: 'Jun 22', venue: 'Santa Clara', t1: 'Algeria', t2: 'Jordan', group: 'J' },
+            { date: 'Jun 27', venue: 'Kansas City', t1: 'Argentina', t2: 'Algeria', group: 'J' },
+            { date: 'Jun 27', venue: 'Dallas', t1: 'Jordan', t2: 'Austria', group: 'J' },
+            // Group K
+            { date: 'Jun 17', venue: 'Houston', t1: 'Portugal', t2: 'Interconf PO 1', group: 'K' },
+            { date: 'Jun 17', venue: 'Mexico City', t1: 'Uzbekistan', t2: 'Colombia', group: 'K' },
+            { date: 'Jun 23', venue: 'Houston', t1: 'Colombia', t2: 'Interconf PO 1', group: 'K' },
+            { date: 'Jun 23', venue: 'Guadalajara', t1: 'Portugal', t2: 'Uzbekistan', group: 'K' },
+            { date: 'Jun 27', venue: 'Miami', t1: 'Portugal', t2: 'Colombia', group: 'K' },
+            { date: 'Jun 27', venue: 'Atlanta', t1: 'Uzbekistan', t2: 'Interconf PO 1', group: 'K' },
+            // Group L
+            { date: 'Jun 17', venue: 'Toronto', t1: 'England', t2: 'Panama', group: 'L' },
+            { date: 'Jun 17', venue: 'Dallas', t1: 'Croatia', t2: 'Ghana', group: 'L' },
+            { date: 'Jun 23', venue: 'Boston', t1: 'England', t2: 'Croatia', group: 'L' },
+            { date: 'Jun 23', venue: 'Toronto', t1: 'Ghana', t2: 'Panama', group: 'L' },
+            { date: 'Jun 27', venue: 'New York/NJ', t1: 'England', t2: 'Ghana', group: 'L' },
+            { date: 'Jun 27', venue: 'Philadelphia', t1: 'Panama', t2: 'Croatia', group: 'L' }
+        ];
+
+        const venues = ['New York/NJ', 'Dallas', 'Kansas City', 'Houston', 'Atlanta', 'Boston', 'Philadelphia', 'Miami', 'Seattle', 'Santa Clara', 'Los Angeles', 'Mexico City', 'Guadalajara', 'Monterrey', 'Toronto', 'Vancouver'];
+        const fixtures = [...officialMatches];
+
+        // Convert fixture format for render
+        const formattedFixtures = fixtures.map(f => {
+            const team1 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t1) || f.t1.includes(t.n)) || {n: f.t1, f: 'un'};
+            const team2 = groupsData.flatMap(g => g.teams).find(t => t.n.includes(f.t2) || f.t2.includes(t.n)) || {n: f.t2, f: 'un'};
+            return { ...f, t1: team1, t2: team2 };
+        }).sort((a,b) => new Date(a.date) - new Date(b.date));
+
+
+        // Helper for Knockout Data
+        function getTeam(placeholder) {
+            return { n: placeholder, f: 'un', isPlaceholder: true };
+        }
+
+        const matches = {
+            // R32
+            74: { id: 74, round: 'R32', date: 'Jun 29', venue: 'Boston', t1: getTeam('1st Grp E'), t2: getTeam('3rd A/B/C/D/F') },
+            77: { id: 77, round: 'R32', date: 'Jun 30', venue: 'NY/NJ', t1: getTeam('1st Grp I'), t2: getTeam('3rd C/D/F/G/H') },
+            73: { id: 73, round: 'R32', date: 'Jun 28', venue: 'Los Angeles', t1: getTeam('2nd Grp A'), t2: getTeam('2nd Grp B') },
+            75: { id: 75, round: 'R32', date: 'Jun 29', venue: 'Monterrey', t1: getTeam('1st Grp F'), t2: getTeam('2nd Grp C') },
+            83: { id: 83, round: 'R32', date: 'Jul 2', venue: 'Toronto', t1: getTeam('2nd Grp K'), t2: getTeam('2nd Grp L') },
+            84: { id: 84, round: 'R32', date: 'Jul 2', venue: 'Los Angeles', t1: getTeam('1st Grp H'), t2: getTeam('2nd Grp J') },
+            81: { id: 81, round: 'R32', date: 'Jul 1', venue: 'San Francisco', t1: getTeam('1st Grp D'), t2: getTeam('3rd B/E/F/I/J') },
+            82: { id: 82, round: 'R32', date: 'Jul 1', venue: 'Seattle', t1: getTeam('1st Grp G'), t2: getTeam('3rd A/E/H/I/J') },
+            76: { id: 76, round: 'R32', date: 'Jun 29', venue: 'Houston', t1: getTeam('1st Grp C'), t2: getTeam('2nd Grp F') },
+            78: { id: 78, round: 'R32', date: 'Jun 30', venue: 'Dallas', t1: getTeam('2nd Grp E'), t2: getTeam('2nd Grp I') },
+            79: { id: 79, round: 'R32', date: 'Jun 30', venue: 'Mexico City', t1: getTeam('1st Grp A'), t2: getTeam('3rd C/E/F/H/I') },
+            80: { id: 80, round: 'R32', date: 'Jul 1', venue: 'Atlanta', t1: getTeam('1st Grp L'), t2: getTeam('3rd E/H/I/J/K') },
+            86: { id: 86, round: 'R32', date: 'Jul 3', venue: 'Miami', t1: getTeam('1st Grp J'), t2: getTeam('2nd Grp H') },
+            88: { id: 88, round: 'R32', date: 'Jul 3', venue: 'Dallas', t1: getTeam('2nd Grp D'), t2: getTeam('2nd Grp G') },
+            85: { id: 85, round: 'R32', date: 'Jul 2', venue: 'Vancouver', t1: getTeam('1st Grp B'), t2: getTeam('3rd E/F/G/I/J') },
+            87: { id: 87, round: 'R32', date: 'Jul 3', venue: 'Kansas City', t1: getTeam('1st Grp K'), t2: getTeam('3rd D/E/I/J/L') },
+            
+            // R16
+            89: { id: 89, round: 'R16', date: 'Jul 4', venue: 'Philadelphia', t1: getTeam('Winner M74'), t2: getTeam('Winner M77') },
+            90: { id: 90, round: 'R16', date: 'Jul 4', venue: 'Houston', t1: getTeam('Winner M73'), t2: getTeam('Winner M75') },
+            93: { id: 93, round: 'R16', date: 'Jul 6', venue: 'Dallas', t1: getTeam('Winner M83'), t2: getTeam('Winner M84') },
+            94: { id: 94, round: 'R16', date: 'Jul 6', venue: 'Seattle', t1: getTeam('Winner M81'), t2: getTeam('Winner M82') },
+            91: { id: 91, round: 'R16', date: 'Jul 5', venue: 'NY/NJ', t1: getTeam('Winner M76'), t2: getTeam('Winner M78') },
+            92: { id: 92, round: 'R16', date: 'Jul 5', venue: 'Mexico City', t1: getTeam('Winner M79'), t2: getTeam('Winner M80') },
+            95: { id: 95, round: 'R16', date: 'Jul 7', venue: 'Atlanta', t1: getTeam('Winner M86'), t2: getTeam('Winner M88') },
+            96: { id: 96, round: 'R16', date: 'Jul 7', venue: 'Vancouver', t1: getTeam('Winner M85'), t2: getTeam('Winner M87') },
+            
+            // QF
+            97: { id: 97, round: 'QF', date: 'Jul 9', venue: 'Boston', t1: getTeam('Winner M89'), t2: getTeam('Winner M90') },
+            98: { id: 98, round: 'QF', date: 'Jul 10', venue: 'Los Angeles', t1: getTeam('Winner M93'), t2: getTeam('Winner M94') },
+            99: { id: 99, round: 'QF', date: 'Jul 11', venue: 'Miami', t1: getTeam('Winner M91'), t2: getTeam('Winner M92') },
+            100: { id: 100, round: 'QF', date: 'Jul 11', venue: 'Kansas City', t1: getTeam('Winner M95'), t2: getTeam('Winner M96') },
+            
+            // SF
+            101: { id: 101, round: 'SF', date: 'Jul 14', venue: 'Dallas', t1: getTeam('Winner M97'), t2: getTeam('Winner M98') },
+            102: { id: 102, round: 'SF', date: 'Jul 15', venue: 'Atlanta', t1: getTeam('Winner M99'), t2: getTeam('Winner M100') },
+
+            // FINAL
+            104: { id: 104, round: 'Final', date: 'July 19', venue: 'New York/NJ', t1: getTeam('Winner M101'), t2: getTeam('Winner M102') },
+            103: { id: 103, round: '3rd', date: 'July 18', venue: 'Miami', t1: getTeam('Loser M101'), t2: getTeam('Loser M102') }
+        };
+
+        // --- View Logic ---
+        function switchView(viewName, filterQuery = null, updateHistory = true) {
+            document.querySelectorAll('.view-section').forEach(el => {
+                el.classList.add('hidden');
+                el.classList.remove('active');
+            });
+            
+            const target = document.getElementById(`view-${viewName}`);
+            target.classList.remove('hidden');
+            requestAnimationFrame(() => target.classList.add('active'));
+            
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if(btn.dataset.view === viewName) {
+                    btn.classList.add('bg-white/20', 'text-white', 'shadow-inner');
+                    btn.classList.remove('text-slate-300', 'hover:bg-white/10');
+                } else {
+                    btn.classList.remove('bg-white/20', 'text-white', 'shadow-inner');
+                    btn.classList.add('text-slate-300', 'hover:bg-white/10');
+                }
+            });
+
+            if(viewName === 'fixtures') {
+                const searchInput = document.getElementById('fixture-search');
+                if(filterQuery) {
+                    searchInput.value = filterQuery;
+                    filterFixtures();
+                } else if (!searchInput.value) {
+                    filterFixtures(); 
+                }
+            }
+
+            if (updateHistory) {
+                history.pushState({ view: viewName, filter: filterQuery }, '', `#${viewName}`);
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('popstate', (event) => {
+            if (event.state) {
+                switchView(event.state.view, event.state.filter, false);
+            } else {
+                switchView('groups', null, false);
+            }
+        });
+
+        function advanceToKnockout() {
+            switchView('bracket');
+            confetti({
+                particleCount: 200,
+                spread: 100,
+                origin: { y: 0.6 },
+                colors: ['#60a5fa', '#f472b6', '#a78bfa', '#ffffff']
+            });
+        }
+
+        // --- Render Groups ---
+        function renderGroups() {
+            const container = document.getElementById('groups-container');
+            container.innerHTML = groupsData.map((group, idx) => {
+                return `
+                <div onclick="switchView('fixtures', 'Group ${group.id}')" class="cursor-pointer glass-card rounded-xl overflow-hidden group relative" style="animation-delay: ${idx * 0.05}s">
+                    <div class="px-4 py-2 border-b border-white/10 flex justify-between items-center relative bg-white/5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-black text-sm shadow-md group-hover:scale-110 transition-transform">
+                                ${group.id}
+                            </div>
+                            <span class="font-bold text-base text-white tracking-tight">Group ${group.id}</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400 group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="p-2">
+                        <table class="w-full">
+                            <tbody class="text-xs">
+                                ${group.teams.map((team, i) => {
+                                    return `
+                                    <tr onclick="event.stopPropagation(); switchView('fixtures', '${team.n}')" class="transition-all rounded cursor-pointer hover:bg-white/5">
+                                        <td class="py-1.5 px-3 flex items-center gap-3 font-medium text-slate-300">
+                                            ${team.f !== 'un' ? `<span class="fi fi-${team.f} text-base rounded shadow-sm"></span>` : `<i data-lucide="globe" class="w-4 h-4 text-slate-500"></i>`}
+                                            <span class="truncate tracking-wide flex-grow">${team.n}</span>
+                                        </td>
+                                    </tr>
+                                `}).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `}).join('');
+            lucide.createIcons();
+        }
+
+        // --- Render Fixtures ---
+        function renderFixturesTable(list) {
+            const tbody = document.getElementById('fixtures-body');
+            const noResults = document.getElementById('no-results');
+            
+            if(list.length === 0) {
+                tbody.innerHTML = '';
+                noResults.classList.remove('hidden');
+                return;
+            }
+            
+            noResults.classList.add('hidden');
+            tbody.innerHTML = list.map(match => `
+                <tr class="hover:bg-white/5 transition-colors group border-b border-white/5 last:border-0">
+                    <td class="py-2.5 px-5 text-xs font-semibold text-slate-300 whitespace-nowrap">
+                        ${match.date}
+                    </td>
+                    <td class="py-2.5 px-5">
+                        <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-blue-500/20 text-blue-300 border border-blue-500/30 font-bold text-[10px]">
+                            ${match.group}
+                        </span>
+                    </td>
+                    <td class="py-2.5 px-5 text-right">
+                        <div class="flex items-center justify-end gap-3">
+                            <span class="font-bold text-white text-xs">${match.t1.n}</span>
+                            ${match.t1.f !== 'un' ? `<span class="fi fi-${match.t1.f} rounded shadow-sm text-sm"></span>` : ''}
+                            <span class="text-slate-500 px-1 font-mono text-[9px]">VS</span>
+                            ${match.t2.f !== 'un' ? `<span class="fi fi-${match.t2.f} rounded shadow-sm text-sm"></span>` : ''}
+                            <span class="font-bold text-white text-xs">${match.t2.n}</span>
+                        </div>
+                    </td>
+                    <td class="py-2.5 px-5 text-right text-xs text-slate-400 font-medium truncate max-w-[120px]">
+                        ${match.venue}
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function filterFixtures() {
+            const query = document.getElementById('fixture-search').value.toLowerCase();
+            const btn = document.getElementById('clear-btn');
+            btn.classList.toggle('hidden', query.length === 0);
+            const filtered = formattedFixtures.filter(m => 
+                m.t1.n.toLowerCase().includes(query) || 
+                m.t2.n.toLowerCase().includes(query) || 
+                m.venue.toLowerCase().includes(query) || 
+                `group ${m.group.toLowerCase()}`.includes(query)
+            );
+            renderFixturesTable(filtered);
+        }
+
+        function clearFilter() {
+            document.getElementById('fixture-search').value = '';
+            filterFixtures();
+        }
+
+        // --- Render Bracket (Vertical Flow) ---
+        function createMatchCard(match, isFinal = false) {
+            let specificStyle = 'glass-card';
+            if (match.round === 'QF') specificStyle = 'card-qf'; 
+            if (match.round === 'SF') specificStyle = 'card-sf'; 
+
+            const finalStyle = isFinal ? 
+                'w-full max-w-lg min-h-[16rem] border-amber-500/50 bg-gradient-to-br from-amber-900/40 to-black/60 shadow-[0_0_50px_rgba(245,158,11,0.2)] z-30' : 
+                `w-full ${specificStyle} min-h-[10rem]`; 
+            
+            // Badge: Icon Center - NO PILL
+            const badge = isFinal ? `
+                <div class="absolute top-4 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center">
+                    <div class="relative w-14 h-14 rounded-full bg-black/50 ring-4 ring-amber-400/50 shadow-[0_0_20px_rgba(251,191,36,0.6)] flex items-center justify-center overflow-hidden">
+                        <img src="fifa2026.png" class="w-10 h-10 object-contain" alt="Final Logo">
+                    </div>
+                </div>
+                ` : '';
+            
+            const renderTeam = (team) => `
+                <div class="flex items-center justify-between px-3 py-2 bg-black/20 rounded border border-white/5 transition-all group-hover:bg-white/5 h-10">
+                    <div class="flex items-center gap-3 overflow-hidden w-full">
+                        ${team.f !== 'un' ? `<span class="fi fi-${team.f} rounded-sm shadow-sm text-2xl"></span>` : `<i data-lucide="globe" class="w-5 h-5 text-slate-500"></i>`}
+                        <span class="text-xs font-bold text-white truncate">${team.n}</span>
+                    </div>
+                </div>`;
+
+            return `
+                <div class="match-card relative flex flex-col justify-between ${finalStyle} rounded-xl p-4 mb-0 group overflow-hidden transition-all duration-300 mx-auto">
+                    ${badge}
+                    <div class="flex justify-between items-center mb-3 border-b border-white/5 pb-2 ${isFinal ? 'mt-14' : ''}">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1"><i data-lucide="calendar" class="w-3 h-3 text-blue-400"></i> ${match.date}</span>
+                        <span class="text-[10px] text-slate-400 truncate max-w-[150px] text-right">${match.venue}</span>
+                    </div>
+                    <div class="flex flex-col gap-2 relative z-10 flex-grow justify-center">
+                        ${renderTeam(match.t1)}
+                        ${renderTeam(match.t2)}
+                    </div>
+                </div>`;
+        }
+
+        function renderBracket() {
+            const root = document.getElementById('vertical-bracket-root');
+            const getMatches = (ids) => ids.map(id => matches[id]);
+
+            const stages = [
+                { title: 'Round of 32', ids: [73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88], cols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' },
+                { title: 'Round of 16', ids: [89,90,91,92,93,94,95,96], cols: 'grid-cols-1 md:grid-cols-2 lg:grid-cols-4' },
+                { title: 'Quarter Finals', ids: [97,98,99,100], cols: 'grid-cols-1 md:grid-cols-2' },
+                { title: 'Semi Finals', ids: [101,102], cols: 'grid-cols-1 md:grid-cols-2' },
+            ];
+
+            let html = '';
+            
+            stages.forEach((stage, i) => {
+                html += `
+                    <div class="bracket-stage relative">
+                        <h3 class="text-center text-blue-300 font-black text-xl uppercase tracking-[0.2em] mb-8 sticky top-20 z-40 drop-shadow-md">${stage.title}</h3>
+                        <div class="grid ${stage.cols} gap-6 max-w-6xl mx-auto">
+                            ${getMatches(stage.ids).map(m => createMatchCard(m)).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="bracket-stage relative pt-12 text-center">
+                    <h3 class="text-center text-amber-400 font-black text-2xl uppercase tracking-[0.2em] mb-12">World Cup Final</h3>
+                    <div class="flex flex-col items-center gap-12">
+                        <div class="animate-bounce-slow hover:pause w-full flex justify-center px-4">${createMatchCard(matches[104], true)}</div>
+                        <div class="opacity-70 hover:opacity-100 transition-opacity w-full flex flex-col items-center">
+                            <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-500 mb-2">3rd Place</h4>
+                            <div class="w-full max-w-lg mx-auto px-4">${createMatchCard(matches[103])}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            root.innerHTML = html;
+            lucide.createIcons();
+        }
+
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        const ballImage = new Image();
+        const svgString = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><circle cx="256" cy="256" r="256" fill="white"/><path fill="black" d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm0-464c23.6 0 46.3 3.6 67.6 10.1L272 173.6l-89.8 65.3L96.6 179.8C127.3 99.6 203.9 48 256 48zm121.7 41.6c43.1 36.3 73.3 87.6 82.8 145.7l-98.9 43.9-63.2-113.6 79.3-76zM134.3 90.6l78.1 75.3-64.4 114.7-98-45.7C60.2 176.7 90.5 125.7 134.3 90.6zM48 256c0-12.7 1.6-25 4.6-36.8l98.3 45.9 8 131.2-96.6 42.9C52.7 398.9 48 354.3 48 256zm144.1 161.2l-7.5-122.9 101.4-73.7 102.5 72.5-6.3 124.1L256 464l-63.9-46.8zm117.8 23.4l6.9-136 99.8-44.4c2.6 10.9 4.1 22.3 4.1 33.9 0 98.4-44.8 183.1-110.8 229.4l-93-45.9c32.7-7.9 62.6-20.9 89.2-37zm-89.2-37l-93 45.9C63.9 392.1 48 307.4 48 209c0-11.6 1.5-23 4.1-33.9l99.8 44.4 6.9 136z"/></svg>`;
+        ballImage.src = 'data:image/svg+xml;base64,' + btoa(svgString);
+        let balls = [];
+
+        class Ball {
+            constructor() { this.init(); }
+            init() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.size = Math.random() * 20 + 15; 
+                this.speedX = (Math.random() - 0.5) * 1.5;
+                this.speedY = (Math.random() - 0.5) * 1.5;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.rotSpeed = (Math.random() - 0.5) * 0.05;
+                this.opacity = Math.random() * 0.3 + 0.1;
+            }
+            update() {
+                this.x += this.speedX; this.y += this.speedY; this.rotation += this.rotSpeed;
+                if (this.x < -50) this.x = window.innerWidth + 50;
+                if (this.x > window.innerWidth + 50) this.x = -50;
+                if (this.y < -50) this.y = window.innerHeight + 50;
+                if (this.y > window.innerHeight + 50) this.y = -50;
+            }
+            draw() {
+                if (!ballImage.complete || ballImage.naturalWidth === 0) return;
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
+                ctx.globalAlpha = this.opacity;
+                ctx.drawImage(ballImage, -this.size/2, -this.size/2, this.size, this.size);
+                ctx.restore();
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            balls.forEach(b => { b.update(); b.draw(); });
+            requestAnimationFrame(animate);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+            for(let i=0; i<15; i++) balls.push(new Ball());
+            animate();
+            
+            renderGroups();
+            renderFixturesTable(formattedFixtures); 
+            renderBracket();
+            
+            const initialView = location.hash.replace('#', '') || 'groups';
+            switchView(initialView, null, false);
+
+            document.getElementById('mobile-menu-btn').onclick = () => document.getElementById('mobile-menu').classList.toggle('hidden');
+            window.onresize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+        });
+    </script>
+
+    <script>window.va=window.va||function(){(window.va.q=window.va.q||[]).push(arguments)};</script><script src="/_vercel/insights/script.js"></script>
+	<script>window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script><script src="/_vercel/speed-insights/script.js"></script>	
+        
+</body>
+</html>
