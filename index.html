@@ -8,26 +8,11 @@
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="World Cup 2026 - Road to Glory">
     <meta property="og:description" content="Explore the groups, match fixtures, and knockout bracket for the 2026 World Cup in Canada, Mexico, and the USA.">
-    <meta property="og:image" content="https://wc2026.aimaverick.me/wc2026_og.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://wc2026.aimaverick.me">
     <meta property="og:type" content="website">
-    
-    <!-- Icons -->
-    <link rel="apple-touch-icon" href="https://wc2026.aimaverick.me/wc2026.png">
-    <link rel="icon" type="image/png" href="https://wc2026.aimaverick.me/wc2026.png">
-    
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="World Cup 2026 - Road to Glory">
-    <meta name="twitter:description" content="Explore the groups, match fixtures, and knockout bracket for the 2026 World Cup.">
-    <meta name="twitter:image" content="https://wc2026.aimaverick.me/wc2026_og.png">
     
     <!-- Theme Initialization Script -->
     <script>
-        // Default to dark mode unless the user explicitly saved 'light' in a previous session
-        if (localStorage.getItem('theme') === 'light') {
+        if (localStorage.getItem('theme') === 'light' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: light)').matches)) {
             document.documentElement.classList.remove('dark');
         } else {
             document.documentElement.classList.add('dark');
@@ -169,72 +154,76 @@
             { "id": "L", "teams": [{"n":"England", "c":"ENG", "f":"gb-eng", "p":0, "gd":0, "pts":0}, {"n":"Croatia", "c":"CRO", "f":"hr", "p":0, "gd":0, "pts":0}, {"n":"Ghana", "c":"GHA", "f":"gh", "p":0, "gd":0, "pts":0}, {"n":"Panama", "c":"PAN", "f":"pa", "p":0, "gd":0, "pts":0}] }
         ],
         "fixtures": [
-            { "id": 1, "datetime": "2026-06-11T19:00:00Z", "venue": "Mexico City", "t1": "Mexico", "t2": "South Africa", "group": "A" },
+            { "id": 1, "datetime": "2026-06-11T20:00:00Z", "venue": "Mexico City", "t1": "Mexico", "t2": "South Africa", "group": "A" },
             { "id": 2, "datetime": "2026-06-12T02:00:00Z", "venue": "Guadalajara", "t1": "South Korea", "t2": "Czechia", "group": "A" },
             { "id": 3, "datetime": "2026-06-12T19:00:00Z", "venue": "Toronto", "t1": "Canada", "t2": "Bosnia and Herzegovina", "group": "B" },
-            { "id": 4, "datetime": "2026-06-12T21:00:00Z", "venue": "Los Angeles", "t1": "USA", "t2": "Paraguay", "group": "D" },
-            { "id": 5, "datetime": "2026-06-13T19:00:00Z", "venue": "Boston", "t1": "Haiti", "t2": "Scotland", "group": "C" },
-            { "id": 6, "datetime": "2026-06-13T21:00:00Z", "venue": "Vancouver", "t1": "Australia", "t2": "Türkiye", "group": "D" },
+            { "id": 4, "datetime": "2026-06-13T01:00:00Z", "venue": "Los Angeles", "t1": "USA", "t2": "Paraguay", "group": "D" },
+            { "id": 5, "datetime": "2026-06-13T21:00:00Z", "venue": "Boston", "t1": "Haiti", "t2": "Scotland", "group": "C" },
+            { "id": 6, "datetime": "2026-06-14T01:00:00Z", "venue": "Vancouver", "t1": "Australia", "t2": "Türkiye", "group": "D" },
             { "id": 7, "datetime": "2026-06-13T23:30:00Z", "venue": "New York/NJ", "t1": "Brazil", "t2": "Morocco", "group": "C" },
             { "id": 8, "datetime": "2026-06-14T02:00:00Z", "venue": "San Francisco", "t1": "Qatar", "t2": "Switzerland", "group": "B" },
-            { "id": 9, "datetime": "2026-06-14T19:00:00Z", "venue": "Philadelphia", "t1": "Ivory Coast", "t2": "Ecuador", "group": "E" },
-            { "id": 10, "datetime": "2026-06-14T21:00:00Z", "venue": "Houston", "t1": "Germany", "t2": "Curaçao", "group": "E" },
-            { "id": 11, "datetime": "2026-06-14T23:30:00Z", "venue": "Dallas", "t1": "Netherlands", "t2": "Japan", "group": "F" },
+            { "id": 9, "datetime": "2026-06-14T21:00:00Z", "venue": "Philadelphia", "t1": "Ivory Coast", "t2": "Ecuador", "group": "E" },
+            { "id": 10, "datetime": "2026-06-14T17:00:00Z", "venue": "Houston", "t1": "Germany", "t2": "Curaçao", "group": "E" },
+            { "id": 11, "datetime": "2026-06-14T20:00:00Z", "venue": "Dallas", "t1": "Netherlands", "t2": "Japan", "group": "F" },
             { "id": 12, "datetime": "2026-06-15T02:00:00Z", "venue": "Monterrey", "t1": "Sweden", "t2": "Tunisia", "group": "F" },
-            { "id": 13, "datetime": "2026-06-15T19:00:00Z", "venue": "Miami", "t1": "Saudi Arabia", "t2": "Uruguay", "group": "H" },
-            { "id": 14, "datetime": "2026-06-15T21:00:00Z", "venue": "Atlanta", "t1": "Spain", "t2": "Cape Verde", "group": "H" },
-            { "id": 15, "datetime": "2026-06-15T23:30:00Z", "venue": "Los Angeles", "t1": "Iran", "t2": "New Zealand", "group": "G" },
-            { "id": 16, "datetime": "2026-06-16T02:00:00Z", "venue": "Seattle", "t1": "Belgium", "t2": "Egypt", "group": "G" },
+            { "id": 13, "datetime": "2026-06-15T22:00:00Z", "venue": "Miami", "t1": "Saudi Arabia", "t2": "Uruguay", "group": "H" },
+            { "id": 14, "datetime": "2026-06-15T16:00:00Z", "venue": "Atlanta", "t1": "Spain", "t2": "Cape Verde", "group": "H" },
+            { "id": 15, "datetime": "2026-06-16T01:00:00Z", "venue": "Los Angeles", "t1": "Iran", "t2": "New Zealand", "group": "G" },
+            { "id": 16, "datetime": "2026-06-15T19:00:00Z", "venue": "Seattle", "t1": "Belgium", "t2": "Egypt", "group": "G" },
             { "id": 17, "datetime": "2026-06-16T19:00:00Z", "venue": "New York/NJ", "t1": "France", "t2": "Senegal", "group": "I" },
-            { "id": 18, "datetime": "2026-06-16T21:00:00Z", "venue": "Boston", "t1": "Iraq", "t2": "Norway", "group": "I" },
-            { "id": 19, "datetime": "2026-06-16T23:30:00Z", "venue": "Kansas City", "t1": "Argentina", "t2": "Algeria", "group": "J" },
-            { "id": 20, "datetime": "2026-06-17T02:00:00Z", "venue": "San Francisco", "t1": "Austria", "t2": "Jordan", "group": "J" },
-            { "id": 21, "datetime": "2026-06-17T19:00:00Z", "venue": "Toronto", "t1": "Ghana", "t2": "Panama", "group": "L" },
-            { "id": 22, "datetime": "2026-06-17T21:00:00Z", "venue": "Dallas", "t1": "England", "t2": "Croatia", "group": "L" },
-            { "id": 23, "datetime": "2026-06-17T23:30:00Z", "venue": "Houston", "t1": "Portugal", "t2": "DR Congo", "group": "K" },
+            { "id": 18, "datetime": "2026-06-16T22:00:00Z", "venue": "Boston", "t1": "Iraq", "t2": "Norway", "group": "I" },
+            { "id": 19, "datetime": "2026-06-17T01:00:00Z", "venue": "Kansas City", "t1": "Argentina", "t2": "Algeria", "group": "J" },
+            { "id": 20, "datetime": "2026-06-17T04:00:00Z", "venue": "San Francisco", "t1": "Austria", "t2": "Jordan", "group": "J" },
+            { "id": 21, "datetime": "2026-06-17T23:00:00Z", "venue": "Toronto", "t1": "Ghana", "t2": "Panama", "group": "L" },
+            { "id": 22, "datetime": "2026-06-17T20:00:00Z", "venue": "Dallas", "t1": "England", "t2": "Croatia", "group": "L" },
+            { "id": 23, "datetime": "2026-06-17T17:00:00Z", "venue": "Houston", "t1": "Portugal", "t2": "DR Congo", "group": "K" },
             { "id": 24, "datetime": "2026-06-18T02:00:00Z", "venue": "Mexico City", "t1": "Uzbekistan", "t2": "Colombia", "group": "K" },
-            { "id": 25, "datetime": "2026-06-18T19:00:00Z", "venue": "Atlanta", "t1": "Czechia", "t2": "South Africa", "group": "A" },
-            { "id": 26, "datetime": "2026-06-18T21:00:00Z", "venue": "Los Angeles", "t1": "Switzerland", "t2": "Bosnia and Herzegovina", "group": "B" },
-            { "id": 27, "datetime": "2026-06-18T23:30:00Z", "venue": "Vancouver", "t1": "Canada", "t2": "Qatar", "group": "B" },
-            { "id": 28, "datetime": "2026-06-19T02:00:00Z", "venue": "Guadalajara", "t1": "Mexico", "t2": "South Korea", "group": "A" },
-            { "id": 29, "datetime": "2026-06-19T19:00:00Z", "venue": "Philadelphia", "t1": "Brazil", "t2": "Haiti", "group": "C" },
-            { "id": 30, "datetime": "2026-06-19T21:00:00Z", "venue": "Boston", "t1": "Scotland", "t2": "Morocco", "group": "C" },
-            { "id": 31, "datetime": "2026-06-19T23:30:00Z", "venue": "San Francisco", "t1": "Türkiye", "t2": "Paraguay", "group": "D" },
-            { "id": 32, "datetime": "2026-06-20T02:00:00Z", "venue": "Seattle", "t1": "USA", "t2": "Australia", "group": "D" },
-            { "id": 33, "datetime": "2026-06-20T19:00:00Z", "venue": "Toronto", "t1": "Germany", "t2": "Ivory Coast", "group": "E" },
-            { "id": 34, "datetime": "2026-06-20T21:00:00Z", "venue": "Kansas City", "t1": "Ecuador", "t2": "Curaçao", "group": "E" },
-            { "id": 35, "datetime": "2026-06-20T23:30:00Z", "venue": "Houston", "t1": "Netherlands", "t2": "Sweden", "group": "F" },
-            { "id": 36, "datetime": "2026-06-21T02:00:00Z", "venue": "Monterrey", "t1": "Tunisia", "t2": "Japan", "group": "F" },
-            { "id": 37, "datetime": "2026-06-21T19:00:00Z", "venue": "Miami", "t1": "Uruguay", "t2": "Cape Verde", "group": "H" },
-            { "id": 38, "datetime": "2026-06-21T21:00:00Z", "venue": "Atlanta", "t1": "Spain", "t2": "Saudi Arabia", "group": "H" },
-            { "id": 39, "datetime": "2026-06-21T23:30:00Z", "venue": "Los Angeles", "t1": "Belgium", "t2": "Iran", "group": "G" },
-            { "id": 40, "datetime": "2026-06-22T02:00:00Z", "venue": "Vancouver", "t1": "New Zealand", "t2": "Egypt", "group": "G" },
-            { "id": 41, "datetime": "2026-06-22T19:00:00Z", "venue": "New York/NJ", "t1": "Norway", "t2": "Senegal", "group": "I" },
+            { "id": 25, "datetime": "2026-06-18T16:00:00Z", "venue": "Atlanta", "t1": "Czechia", "t2": "South Africa", "group": "A" },
+            { "id": 26, "datetime": "2026-06-18T19:00:00Z", "venue": "Los Angeles", "t1": "Switzerland", "t2": "Bosnia and Herzegovina", "group": "B" },
+            { "id": 27, "datetime": "2026-06-18T22:00:00Z", "venue": "Vancouver", "t1": "Canada", "t2": "Qatar", "group": "B" },
+            { "id": 28, "datetime": "2026-06-19T01:00:00Z", "venue": "Guadalajara", "t1": "Mexico", "t2": "South Korea", "group": "A" },
+            { "id": 29, "datetime": "2026-06-19T21:00:00Z", "venue": "Philadelphia", "t1": "Brazil", "t2": "Haiti", "group": "C" },
+            { "id": 30, "datetime": "2026-06-19T18:00:00Z", "venue": "Boston", "t1": "Scotland", "t2": "Morocco", "group": "C" },
+            { "id": 31, "datetime": "2026-06-20T03:00:00Z", "venue": "San Francisco", "t1": "Türkiye", "t2": "Paraguay", "group": "D" },
+            { "id": 32, "datetime": "2026-06-19T19:00:00Z", "venue": "Seattle", "t1": "USA", "t2": "Australia", "group": "D" },
+            { "id": 33, "datetime": "2026-06-20T16:00:00Z", "venue": "Toronto", "t1": "Germany", "t2": "Ivory Coast", "group": "E" },
+            { "id": 34, "datetime": "2026-06-20T19:00:00Z", "venue": "Kansas City", "t1": "Ecuador", "t2": "Curaçao", "group": "E" },
+            { "id": 35, "datetime": "2026-06-20T12:00:00Z", "venue": "Houston", "t1": "Netherlands", "t2": "Sweden", "group": "F" },
+            { "id": 36, "datetime": "2026-06-21T04:00:00Z", "venue": "Monterrey", "t1": "Tunisia", "t2": "Japan", "group": "F" },
+            { "id": 37, "datetime": "2026-06-21T18:00:00Z", "venue": "Miami", "t1": "Uruguay", "t2": "Cape Verde", "group": "H" },
+            { "id": 38, "datetime": "2026-06-21T12:00:00Z", "venue": "Atlanta", "t1": "Spain", "t2": "Saudi Arabia", "group": "H" },
+            { "id": 39, "datetime": "2026-06-21T19:00:00Z", "venue": "Los Angeles", "t1": "Belgium", "t2": "Iran", "group": "G" },
+            { "id": 40, "datetime": "2026-06-22T01:00:00Z", "venue": "Vancouver", "t1": "New Zealand", "t2": "Egypt", "group": "G" },
+            { "id": 41, "datetime": "2026-06-22T20:00:00Z", "venue": "New York/NJ", "t1": "Norway", "t2": "Senegal", "group": "I" },
             { "id": 42, "datetime": "2026-06-22T21:00:00Z", "venue": "Philadelphia", "t1": "France", "t2": "Iraq", "group": "I" },
-            { "id": 43, "datetime": "2026-06-22T23:30:00Z", "venue": "Dallas", "t1": "Argentina", "t2": "Austria", "group": "J" },
-            { "id": 44, "datetime": "2026-06-23T02:00:00Z", "venue": "San Francisco", "t1": "Jordan", "t2": "Algeria", "group": "J" },
-            { "id": 45, "datetime": "2026-06-23T19:00:00Z", "venue": "Boston", "t1": "England", "t2": "Ghana", "group": "L" },
-            { "id": 46, "datetime": "2026-06-23T21:00:00Z", "venue": "Toronto", "t1": "Panama", "t2": "Croatia", "group": "L" },
-            { "id": 47, "datetime": "2026-06-23T23:30:00Z", "venue": "Houston", "t1": "Portugal", "t2": "Uzbekistan", "group": "K" },
+            { "id": 43, "datetime": "2026-06-22T17:00:00Z", "venue": "Dallas", "t1": "Argentina", "t2": "Austria", "group": "J" },
+            { "id": 44, "datetime": "2026-06-23T04:00:00Z", "venue": "San Francisco", "t1": "Jordan", "t2": "Algeria", "group": "J" },
+            { "id": 45, "datetime": "2026-06-23T20:00:00Z", "venue": "Boston", "t1": "England", "t2": "Ghana", "group": "L" },
+            { "id": 46, "datetime": "2026-06-23T19:00:00Z", "venue": "Toronto", "t1": "Panama", "t2": "Croatia", "group": "L" },
+            { "id": 47, "datetime": "2026-06-23T12:00:00Z", "venue": "Houston", "t1": "Portugal", "t2": "Uzbekistan", "group": "K" },
             { "id": 48, "datetime": "2026-06-24T02:00:00Z", "venue": "Guadalajara", "t1": "Colombia", "t2": "DR Congo", "group": "K" },
+            
             { "id": 49, "datetime": "2026-06-24T21:00:00Z", "venue": "Miami", "t1": "Scotland", "t2": "Brazil", "group": "C" },
             { "id": 50, "datetime": "2026-06-24T21:00:00Z", "venue": "Atlanta", "t1": "Morocco", "t2": "Haiti", "group": "C" },
             { "id": 51, "datetime": "2026-06-24T23:30:00Z", "venue": "Vancouver", "t1": "Switzerland", "t2": "Canada", "group": "B" },
             { "id": 52, "datetime": "2026-06-24T23:30:00Z", "venue": "Seattle", "t1": "Bosnia and Herzegovina", "t2": "Qatar", "group": "B" },
             { "id": 53, "datetime": "2026-06-25T02:00:00Z", "venue": "Mexico City", "t1": "Czechia", "t2": "Mexico", "group": "A" },
             { "id": 54, "datetime": "2026-06-25T02:00:00Z", "venue": "Monterrey", "t1": "South Africa", "t2": "South Korea", "group": "A" },
+            
             { "id": 55, "datetime": "2026-06-25T21:00:00Z", "venue": "Philadelphia", "t1": "Curaçao", "t2": "Ivory Coast", "group": "E" },
             { "id": 56, "datetime": "2026-06-25T21:00:00Z", "venue": "New York/NJ", "t1": "Ecuador", "t2": "Germany", "group": "E" },
             { "id": 57, "datetime": "2026-06-25T23:30:00Z", "venue": "Dallas", "t1": "Japan", "t2": "Sweden", "group": "F" },
             { "id": 58, "datetime": "2026-06-25T23:30:00Z", "venue": "Kansas City", "t1": "Tunisia", "t2": "Netherlands", "group": "F" },
             { "id": 59, "datetime": "2026-06-26T02:00:00Z", "venue": "Los Angeles", "t1": "Türkiye", "t2": "USA", "group": "D" },
             { "id": 60, "datetime": "2026-06-26T02:00:00Z", "venue": "San Francisco", "t1": "Paraguay", "t2": "Australia", "group": "D" },
+            
             { "id": 61, "datetime": "2026-06-26T21:00:00Z", "venue": "Boston", "t1": "Norway", "t2": "France", "group": "I" },
             { "id": 62, "datetime": "2026-06-26T21:00:00Z", "venue": "Toronto", "t1": "Senegal", "t2": "Iraq", "group": "I" },
             { "id": 63, "datetime": "2026-06-26T23:30:00Z", "venue": "Seattle", "t1": "Egypt", "t2": "Iran", "group": "G" },
             { "id": 64, "datetime": "2026-06-26T23:30:00Z", "venue": "Vancouver", "t1": "New Zealand", "t2": "Belgium", "group": "G" },
             { "id": 65, "datetime": "2026-06-27T02:00:00Z", "venue": "Houston", "t1": "Cape Verde", "t2": "Saudi Arabia", "group": "H" },
             { "id": 66, "datetime": "2026-06-27T02:00:00Z", "venue": "Guadalajara", "t1": "Uruguay", "t2": "Spain", "group": "H" },
+            
             { "id": 67, "datetime": "2026-06-27T21:00:00Z", "venue": "New York/NJ", "t1": "Panama", "t2": "England", "group": "L" },
             { "id": 68, "datetime": "2026-06-27T21:00:00Z", "venue": "Philadelphia", "t1": "Croatia", "t2": "Ghana", "group": "L" },
             { "id": 69, "datetime": "2026-06-27T23:30:00Z", "venue": "Kansas City", "t1": "Algeria", "t2": "Austria", "group": "J" },
